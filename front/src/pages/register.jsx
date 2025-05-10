@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Input from "../components/input";
+import Btn from "../components/btn";
+import PasswordInput from "../components/passwordInput";
+import { toast } from "react-toastify";
 
 function Register() {
   const [nom, setNom] = useState("");
@@ -7,18 +11,28 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [dateNaissance, setDateNaissance] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Les mots de passe ne correspondent pas !");
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Veuillez entrer un email valide.");
       return;
     }
 
+    if (password !== confirmPassword) {
+      toast.error("Les mots de passe ne correspondent pas !");
+      return;
+    }
+
+    if (!nom || !prenom || !email || !password || !confirmPassword) {
+        toast.error("Veuillez remplir tous les champs.");
+        return;
+      }
+      
     try {
       const response = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
@@ -30,7 +44,6 @@ function Register() {
           prenom,
           email,
           mot_de_passe: password,  
-          date_naissance: dateNaissance,
         }),
       });
 
@@ -38,74 +51,64 @@ function Register() {
       console.log(data);
 
       if (response.ok) {
-        alert("Inscription réussie !");
+        toast.success("Inscription réussie !");
         navigate("/login");
       } else {
-        alert(data.message || "Erreur lors de l'inscription");
+        toast.error(data.message || "Erreur lors de l'inscription");
       }
     } catch (error) {
-      console.error("Erreur:", error);
-      alert("Erreur de connexion au serveur");
+      toast.error("Erreur de connexion au serveur");
     }
   };
 
   return (
-    <div>
-      <h1>S'inscrire</h1>
-      <form className="container" onSubmit={handleSubmit}>
-        <div className="input-container">
-          <input 
-            type="text" 
-            placeholder="Nom" 
-            value={nom} 
-            onChange={(e) => setNom(e.target.value)} 
-          />
-        </div>
-        <div className="input-container">
-          <input 
-            type="text" 
-            placeholder="Prénom" 
-            value={prenom} 
-            onChange={(e) => setPrenom(e.target.value)} 
-          />
-        </div>
-        <div className="input-container">
-         <input 
-            type="date" 
-            placeholder="Date de naissance" 
-            value={dateNaissance} 
-            onChange={(e) => setDateNaissance(e.target.value)} 
-         />
-        </div>
+    <div className="flex flex-col justify-center items-center h-screen bg-orange-50 px-4">
+      <h1 className="text-2xl font-semibold mb-6">Inscription</h1>
+      <form className="container w-full max-w-sm flex flex-col gap-4" onSubmit={handleSubmit}>
 
-        <div className="input-container">
-          <input 
-            type="email" 
-            placeholder="Email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-          />
-        </div>
-        <div className="input-container">
-          <input 
-            type="password" 
-            placeholder="Mot de passe" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-          />
-        </div>
-        <div className="input-container">
-          <input 
-            type="password" 
-            placeholder="Confirmez le mot de passe" 
-            value={confirmPassword} 
-            onChange={(e) => setConfirmPassword(e.target.value)} 
-          />
-        </div>
-        <div className="submit-btn">
-          <button type="submit">S'inscrire</button>
+        <Input
+        type="text"
+        placeholder="Nom"
+        value={nom}
+        onChange={(e) => setNom(e.target.value)} 
+        />
+
+        <Input
+        type="text"
+        placeholder="Prénom"
+        value={prenom}
+        onChange={(e) => setPrenom(e.target.value)} 
+        />
+
+        <Input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)} 
+        />
+
+        <PasswordInput
+        value={password}
+        onChange={(e) => setPassword(e.target.value)} 
+        />
+
+        <Input
+        type="password"
+        placeholder="Confirmez le mot de passe"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)} 
+        />
+
+        <div className="submit-btn flex justify-center">
+          <Btn type="submit" className="w-full px-4 py-2 bg-blue-300 hover:bg-blue-400 text-white rounded font-medium text-base transition">S'inscrire</Btn>
         </div>
       </form>
+      <Btn
+      onClick={() => navigate("/")}
+      className="px-4 py-2 text-gray-700"
+    >
+      ← Retour
+      </Btn>
     </div>
   );
 }
