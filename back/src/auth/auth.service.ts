@@ -19,15 +19,11 @@ export class AuthService {
 
   async login(loginUserDto: LoginUserDto): Promise<{ accessToken: string }> {
     const user = await this.usersService.findUserByEmail(loginUserDto.email);
-    console.log('Mot de passe envoyé :', loginUserDto.mot_de_passe);
-    console.log('Mot de passe stocké :', user.mot_de_passe);
     const isPasswordValid = await bcrypt.compare(loginUserDto.mot_de_passe, user.mot_de_passe);
+
     if (!isPasswordValid) {
     throw new BadRequestException('Email ou mot de passe incorrect');
-}
-    
-    console.log('Mot de passe valide :', isPasswordValid);
-
+    }
 
     const payload = { email: user.email, sub: user.id,roles: user.roles }; 
     const accessToken = await this.jwtService.signAsync(payload, {

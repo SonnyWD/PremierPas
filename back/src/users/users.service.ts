@@ -7,6 +7,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
+import { Tool } from 'src/tools/entities/tool.entity';
 
 
 @Injectable()
@@ -14,6 +15,8 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(Tool)
+    private toolRepository: Repository<Tool>,
   ){}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -34,7 +37,7 @@ export class UsersService {
       
     const savedUser = await this.userRepository.save(newUser);
 
-return instanceToPlain(savedUser) as User;
+    return instanceToPlain(savedUser) as User;
 
   }
 
@@ -93,24 +96,68 @@ return instanceToPlain(savedUser) as User;
     return this.userRepository.save(user);
   }
 
-  async userPoint(userId: number): Promise<User> {
+  public async userPoint(userId: number): Promise<User> {
     const user = await this.findUser(userId);
-
+  
     if (!user.lastLogin) {
-        throw new Error("La date de dernière connexion est invalide.");
+      throw new BadRequestException('La date de dernière connexion est invalide.');
     }
+  
+    const now = new Date();
+    const timeDifference = now.getTime() - user.lastLogin.getTime();
+    const minutes = Math.floor(timeDifference / 6000); 
+  
+    user.point = (user.point || 0) + minutes;
+    user.lastLogin = now;
+  
+    const savedUser = await this.userRepository.save(user);
+  
+    return savedUser;
+  }
+  
+  async getFavoriteTools(userId: number): Promise<Tool[]> {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['favoriteTools'],
+    });
+    if (!user) throw new BadRequestException('Utilisateur non trouvé');
+    
+    return user.favoriteTools;
+  }
 
-    const time = new Date();
-    const timeDifference = time.getTime() - user.lastLogin.getTime(); 
-    const minutes = Math.floor(timeDifference / 60000); 
-
-    user.point += minutes;
-
-    user.lastLogin = time;
-
-    return this.userRepository.save(user);
-}
-
+  async addFavoriteTool(userId: number, toolId: number): Promise<User> {
+  
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['favoriteTools'],
+    });
+    if (!user) throw new BadRequestException('Utilisateur non trouvé');
+  
+    const tool = await this.toolRepository.findOne({ where: { id: toolId } });
+    if (!tool) throw new BadRequestException('Outil non trouvé');
+  
+    const alreadyFavorite = user.favoriteTools.some(t => t.id === tool.id);
+    if (alreadyFavorite) {
+      throw new BadRequestException('Déjà dans les favoris');
+    }
+  
+    user.favoriteTools.push(tool);
+    return await this.userRepository.save(user);
+  }  
+  
+  
+  async removeFavoriteTool(userId: number, toolId: number): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['favoriteTools'],
+    });
+    if (!user) throw new BadRequestException('Utilisateur non trouvé');
+  
+    user.favoriteTools = user.favoriteTools.filter(tool => tool.id !== toolId);
+    await this.userRepository.save(user);
+  
+    return user;
+  }  
 
 }
 

@@ -45,6 +45,8 @@ import { SponsorshipModule } from './sponsorship/sponsorship.module';
 import { Sponsorship } from './sponsorship/entities/sponsorship.entity';
 import { QuestionsModule } from './questions/questions.module';
 import { Question } from './questions/entities/question.entity';
+import { ToolsModule } from './tools/tools.module';
+import { Tool } from './tools/entities/tool.entity';
 
 @Module({
   imports: [
@@ -58,7 +60,7 @@ import { Question } from './questions/entities/question.entity';
       username: 'root',
       password: 'rootroot',
       database: 'premiers_pas',
-      entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, ListeCategorie, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question],
+      entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, ListeCategorie, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question, Tool],
       synchronize: true, // à mettre à false en production
       driver: require('mysql2')
     }),
@@ -81,6 +83,7 @@ import { Question } from './questions/entities/question.entity';
     MessagesModule,
     SponsorshipModule,
     QuestionsModule,
+    ToolsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

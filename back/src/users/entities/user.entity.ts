@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable} from 'typeorm';
 import { Exclude } from 'class-transformer'
 import { UserRole } from '../roles/user-role.enum';
 import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
@@ -15,8 +15,9 @@ import { Sponsorship } from 'src/sponsorship/entities/sponsorship.entity';
 import { LikePublication } from 'src/like_publication/entities/like_publication.entity';
 import { LikeComment } from 'src/like_comment/entities/like_comment.entity';
 import { ListeCategorie } from 'src/liste_categorie/entities/liste_categorie.entity';
+import { Tool } from 'src/tools/entities/tool.entity';
 
-@Entity()
+@Entity('user')
 export class User {
 
     @PrimaryGeneratedColumn()
@@ -28,7 +29,7 @@ export class User {
     @Column()
     prenom: string;
 
-    @Column()
+    @Column({nullable: true })
     date_naissance: Date;
 
     @Column({ unique : true })
@@ -113,5 +114,9 @@ export class User {
 
     @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.sponsored)
     sponsored: Sponsorship[];
-  roles: any;
+    roles: any;
+
+    @ManyToMany(() => Tool, (tool) => tool.users)
+    @JoinTable({ name: 'user_favorite_tools_tool' })
+    favoriteTools: Tool[];
 }

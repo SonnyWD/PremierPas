@@ -9,6 +9,7 @@ import { Role } from 'src/auth/role.enum';
 import { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
 
 @Controller('users')
+@UseGuards(JwtAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -17,7 +18,21 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Post('update-points')  
+  async updatePoints(@Req() req: RequestWithUser) {
+    const user = req.user as any;
+    const updatedUser = await this.usersService.userPoint(user.userId);
+    return { points: updatedUser.point }; 
+  }
+  
+  @Post('me/favorites')
+  async addFavorite(
+  @Req() req: RequestWithUser,
+  @Body('toolId', ParseIntPipe) toolId: number
+  ) {
+      return this.usersService.addFavoriteTool(req.user.userId, toolId);
+  }
+
   @Roles(Role.ADMIN, Role.USER)
   @Get()
   findAll() {
@@ -29,28 +44,38 @@ export class UsersController {
     return this.usersService.findOneUser(id);
   }
 
-  @Patch(':id')
-update(
-  @Param('id', ParseIntPipe) id: number,
-  @Body() updateUserDto: UpdateUserDto,
-  @Req() req: RequestWithUser
-) {
-  const user = req.user as any;
-  if (user.role !== Role.ADMIN && user.sub !== id) {
-    throw new ForbiddenException("Vous ne pouvez modifier que votre propre compte.");
+  @Get('me/favorites')
+  async getFavorites(@Req() req: RequestWithUser) {
+    return this.usersService.getFavoriteTools(req.user.userId);
   }
-  return this.usersService.updateUser(id, updateUserDto);
-}
 
-@Delete(':id')
-remove(
-  @Param('id', ParseIntPipe) id: number,
-  @Req() req: RequestWithUser
-) {
-  const user = req.user as any;
-  if (user.role !== Role.ADMIN && user.sub !== id) {
-    throw new ForbiddenException("Vous ne pouvez supprimer que votre propre compte.");
+  @Patch(':id')
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+    @Req() req: RequestWithUser
+  ) {
+    const user = req.user as any;
+    if (user.role !== Role.ADMIN && user.sub !== id) {
+      throw new ForbiddenException("Vous ne pouvez modifier que votre propre compte.");
+    }
+    return this.usersService.updateUser(id, updateUserDto);
   }
-  return this.usersService.removeUser(id);
-}
+
+  @Delete('me/favorites/:toolId')
+  async removeFavorite(@Req() req: RequestWithUser, @Param('toolId', ParseIntPipe) toolId: number) {
+    return this.usersService.removeFavoriteTool(req.user.userId, toolId);
+  }
+
+  @Delete(':id')
+  remove(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: RequestWithUser
+  ) {
+    const user = req.user as any;
+    if (user.role !== Role.ADMIN && user.sub !== id) {
+      throw new ForbiddenException("Vous ne pouvez supprimer que votre propre compte.");
+    }
+    return this.usersService.removeUser(id);
+  }
 }
