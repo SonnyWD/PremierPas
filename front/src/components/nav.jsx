@@ -10,7 +10,7 @@ function Nav(){
   {
     label: "Accueil",
     icon: IoIosHome ,
-    path: "/",
+    path: "/welcome",
   },
   {
     label: "Découvrir",

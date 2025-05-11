@@ -50,9 +50,12 @@ function ToolsList({
 
           {showSaveIcon && (
             <button
-              onClick={() => toggleFavorite?.(title)}
-              className="appearance-none bg-transparent border-none outline-none p-0 m-0 text-xl"
-            >
+              onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                toggleFavorite?.(title);
+              }}
+              className="appearance-none bg-transparent border-none outline-none p-0 m-0 text-xl">
               <SaveIcon isSaved={favoriteTitles.includes(title)} />
             </button>
           )}

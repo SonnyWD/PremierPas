@@ -1,4 +1,4 @@
-import { Link, Links } from "react-router-dom";
+import { Link} from "react-router-dom";
 import SearchBar from "../../components/searchBar";
 import Section from "../../components/section";
 import ToolsList from "../../components/toolsList";
@@ -10,16 +10,16 @@ import { MdOutlineVideoLibrary } from "react-icons/md";
 import Bell from "../../components/bell";
 import { useState, useEffect } from "react";
 import { BsListCheck, BsCalendarHeart } from 'react-icons/bs'; 
-import { TbBabyBottle } from 'react-icons/tb'; 
-import { GiNightSleep } from 'react-icons/gi'; 
+import { LuBaby } from "react-icons/lu";
 import SaveIcon from "../../components/saveIcon";
+import { TbMoodPuzzled } from "react-icons/tb";
 import { fetchTools, fetchFavoriteTools, addFavoriteTool, removeFavoriteTool } from "../../services/toolService";
 
 const iconMapping = {
   BsListCheck: BsListCheck,
   BsCalendarHeart: BsCalendarHeart,
-  TbBabyBottle: TbBabyBottle,
-  GiNightSleep: GiNightSleep,
+  LuBaby: LuBaby,
+  TbMoodPuzzled: TbMoodPuzzled,
 };
 
 function Tools() {
@@ -66,6 +66,7 @@ function Tools() {
   }, [favoriteTitles]);
 
   const toggleFavorite = async (title) => {
+
     const tool = tools.find((t) => t.title === title);
     if (!tool) return;
   
@@ -128,7 +129,7 @@ function Tools() {
                 <SaveIcon
                   key={tool.id}
                   className="mr-4"
-                  onClick={() => toggleFavorite(tool.title)}
+                  onClick={() => {toggleFavorite(tool.title);}}
                 />
               )}
             />
@@ -139,19 +140,29 @@ function Tools() {
       ) : (
         <>
           <SuggestionSection keywords={keywords} showSaveIcon={false} />
-          {tools.map((tool) => {
-            <Link to={`/${tool.path}`} key={tool.id}>
-            <Section>
-              <h2 className="font-bold gap-4 ml-4">Outils</h2>
-              <ToolsList
-                tools={toolsToDisplay}
-                className="flex flex-col p-2"
-                showSaveIcon={true}
-                toggleFavorite={toggleFavorite}
-                favoriteTitles={favoriteTitles}
-              />
-            </Section>
-          </Link>
+          <h2 className="font-bold gap-4 ml-4">Outils</h2>
+          {toolsToDisplay.map((tool) => {
+            return(
+              <Link to={`/${tool.path}`} key={tool.id}>
+                <Section>
+                  <ToolsList
+                    tools={[tool]}
+                    className="flex flex-col p-2"
+                    showSaveIcon={true}
+                    toggleFavorite={toggleFavorite}
+                    favoriteTitles={favoriteTitles}
+                    renderSaveIcon={(tool) => (
+                      <SaveIcon
+                        key={tool.id}
+                        className="mr-4"
+                        onClick={() => {toggleFavorite(tool.title);}}
+                      />
+                    )}
+                  />
+                </Section>
+              </Link>
+            )
+            
           })}
           
         </>
