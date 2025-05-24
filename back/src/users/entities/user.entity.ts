@@ -16,6 +16,7 @@ import { LikePublication } from 'src/like_publication/entities/like_publication.
 import { LikeComment } from 'src/like_comment/entities/like_comment.entity';
 import { ListeCategorie } from 'src/liste_categorie/entities/liste_categorie.entity';
 import { Tool } from 'src/tools/entities/tool.entity';
+import { AccessContent } from 'src/access_content/entities/access_content.entity';
 
 @Entity('user')
 export class User {
@@ -51,7 +52,7 @@ export class User {
     @Column({ type: 'json', nullable: true })
     suggested_name: object;
 
-    @Column({ default: 0 })
+    @Column({ type: 'int', default: 0 })
     point: number;
 
     @Column({ type: 'varchar', nullable: true })
@@ -62,6 +63,9 @@ export class User {
 
     @Column({ type: 'datetime', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     lastLogin: Date;
+
+    @Column({ type: 'enum', enum: ['femme_enceinte', 'parent', 'autre'] })
+    type_profil: 'femme_enceinte' | 'parent' | 'autre';
 
     @Column({ type: 'datetime', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     lastLogOut: Date;
@@ -89,13 +93,13 @@ export class User {
      todos: TodoList[];
 
      @OneToMany(() => ListeCategorie, (categorie) => categorie.user)
-    categories: ListeCategorie[];
+     categories: ListeCategorie[];
 
      @OneToMany(() => LikePublication, (likePublication) => likePublication.user)
      likePublication: LikePublication[];
 
      @OneToMany(() => LikeComment, (likeComment) => likeComment.user)
-     likeComment: LikePublication[];
+     likeComment: LikeComment[];
 
      @OneToMany(() => Publication, (publications) => publications.user)
      publications: Publication[];
@@ -106,17 +110,20 @@ export class User {
      @OneToMany(() => Message, (message) => message.envoyeur)
      sentMessages: Message[];
 
-    @OneToMany(() => Message, (message) => message.receveur)
-    receivedMessages: Message[];
+     @OneToMany(() => Message, (message) => message.receveur)
+     receivedMessages: Message[];
 
-    @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.sponsor)
-    sponsor: Sponsorship[];
+     @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.sponsor)
+     sponsor: Sponsorship[];
 
-    @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.sponsored)
-    sponsored: Sponsorship[];
-    roles: any;
+     @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.sponsored)
+     sponsored: Sponsorship[];
+     roles: any;
 
-    @ManyToMany(() => Tool, (tool) => tool.users)
-    @JoinTable({ name: 'user_favorite_tools_tool' })
-    favoriteTools: Tool[];
+     @OneToMany(() => AccessContent, (access) => access.user)
+     access: AccessContent[];
+
+     @ManyToMany(() => Tool, (tool) => tool.users)
+     @JoinTable({ name: 'user_favorite_tools_tool' })
+     favoriteTools: Tool[];
 }

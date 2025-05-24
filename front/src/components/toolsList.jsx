@@ -8,7 +8,7 @@ function ToolsList({
   reverseOrder = false,
   deleteDescription = false,
   toggleFavorite,
-  favoriteTitles = [],
+  favoriteIds = [],
 }) {
   if (!Array.isArray(tools)) {
     console.error("'tools' doit être un tableau.");
@@ -17,9 +17,9 @@ function ToolsList({
 
   return (
     <div className={className}>
-      {tools.map(({ icon, title, description }, index) => (
+      {tools.map(({ id, icon, title, description }, index) => (
         <div
-          key={index}
+          key={id || index}
           className="bg-white shadow-md rounded-xl p-4 mb-4 flex items-center justify-between"
         >
           {icon ? (
@@ -53,10 +53,10 @@ function ToolsList({
               onClick={(event) => {
                 event.stopPropagation();
                 event.preventDefault();
-                toggleFavorite?.(title);
+                toggleFavorite?.(id);
               }}
               className="appearance-none bg-transparent border-none outline-none p-0 m-0 text-xl">
-              <SaveIcon isSaved={favoriteTitles.includes(title)} />
+              <SaveIcon isSaved={favoriteIds.includes(id)} />
             </button>
           )}
         </div>

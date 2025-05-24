@@ -19,6 +19,7 @@ import { PublicationModule } from 'src/publication/publication.module';
 import { CommentsModule } from 'src/comments/comments.module';
 import { MessagesModule } from 'src/messages/messages.module';
 import { SponsorshipModule } from 'src/sponsorship/sponsorship.module';
+import { AccessContentModule } from 'src/access_content/access_content.module';
 
 
 @Module({
@@ -37,7 +38,9 @@ import { SponsorshipModule } from 'src/sponsorship/sponsorship.module';
                 PublicationModule,
                 CommentsModule,
                 MessagesModule,
-                SponsorshipModule],
+                SponsorshipModule,
+                AccessContentModule
+              ],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService]
