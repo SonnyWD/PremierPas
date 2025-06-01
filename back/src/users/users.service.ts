@@ -96,8 +96,8 @@ export class UsersService {
     return this.userRepository.save(user);
   }
 
-  public async userPoint(userId: number): Promise<User> {
-    const user = await this.findUser(userId);
+  public async userPoint(id: number): Promise<User> {
+    const user = await this.findUser(id);
   
     if (!user.lastLogin) {
       throw new BadRequestException('La date de dernière connexion est invalide.');
@@ -115,9 +115,9 @@ export class UsersService {
     return savedUser;
   }
   
-  async getFavoriteTools(userId: number): Promise<Tool[]> {
+  async getFavoriteTools(id: number): Promise<Tool[]> {
     const user = await this.userRepository.findOne({
-      where: { id: userId },
+      where: { id: id },
       relations: ['favoriteTools'],
     });
     if (!user) throw new BadRequestException('Utilisateur non trouvé');
@@ -125,10 +125,10 @@ export class UsersService {
     return user.favoriteTools;
   }
 
-  async addFavoriteTool(userId: number, toolId: number): Promise<User> {
+  async addFavoriteTool(id: number, toolId: number): Promise<User> {
   
     const user = await this.userRepository.findOne({
-      where: { id: userId },
+      where: { id: id },
       relations: ['favoriteTools'],
     });
     if (!user) throw new BadRequestException('Utilisateur non trouvé');
@@ -146,9 +146,9 @@ export class UsersService {
   }  
   
   
-  async removeFavoriteTool(userId: number, toolId: number): Promise<User> {
+  async removeFavoriteTool(id: number, toolId: number): Promise<User> {
     const user = await this.userRepository.findOne({
-      where: { id: userId },
+      where: { id: id },
       relations: ['favoriteTools'],
     });
     if (!user) throw new BadRequestException('Utilisateur non trouvé');

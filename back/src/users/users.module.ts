@@ -12,7 +12,6 @@ import { MediaBabyModule } from 'src/media_baby/media_baby.module';
 import { AnswerFormModule } from 'src/answer_form/answer_form.module';
 import { QuizModule } from 'src/quiz/quiz.module';
 import { TodoListModule } from 'src/todo_list/todo_list.module';
-import { ListeCategorieModule } from 'src/liste_categorie/liste_categorie.module';
 import { LikePublicationModule } from 'src/like_publication/like_publication.module';
 import { LikeCommentModule } from 'src/like_comment/like_comment.module';
 import { PublicationModule } from 'src/publication/publication.module';
@@ -32,7 +31,6 @@ import { AccessContentModule } from 'src/access_content/access_content.module';
                 AnswerFormModule,
                 QuizModule,
                 TodoListModule,
-                ListeCategorieModule,
                 LikePublicationModule,
                 LikeCommentModule,
                 PublicationModule,

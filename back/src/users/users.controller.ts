@@ -21,16 +21,16 @@ export class UsersController {
   @Post('update-points')  
   async updatePoints(@Req() req: RequestWithUser) {
     const user = req.user as any;
-    const updatedUser = await this.usersService.userPoint(user.userId);
+    const updatedUser = await this.usersService.userPoint(user.id); 
     return { points: updatedUser.point }; 
   }
   
   @Post('me/favorites')
   async addFavorite(
-  @Req() req: RequestWithUser,
-  @Body('toolId', ParseIntPipe) toolId: number
+    @Req() req: RequestWithUser,
+    @Body('toolId', ParseIntPipe) toolId: number
   ) {
-      return this.usersService.addFavoriteTool(req.user.userId, toolId);
+      return this.usersService.addFavoriteTool(req.user.id, toolId);
   }
 
   @Roles(Role.ADMIN, Role.USER)
@@ -46,7 +46,7 @@ export class UsersController {
 
   @Get('me/favorites')
   async getFavorites(@Req() req: RequestWithUser) {
-    return this.usersService.getFavoriteTools(req.user.userId);
+    return this.usersService.getFavoriteTools(req.user.id);
   }
 
   @Patch(':id')
@@ -64,7 +64,7 @@ export class UsersController {
 
   @Delete('me/favorites/:toolId')
   async removeFavorite(@Req() req: RequestWithUser, @Param('toolId', ParseIntPipe) toolId: number) {
-    return this.usersService.removeFavoriteTool(req.user.userId, toolId);
+    return this.usersService.removeFavoriteTool(req.user.id, toolId);
   }
 
   @Delete(':id')

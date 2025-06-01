@@ -4,7 +4,6 @@ import { UpdateTodoListDto } from './dto/update-todo_list.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TodoList } from './entities/todo_list.entity';
 import { User } from 'src/users/entities/user.entity';
-import { ListeCategorie } from 'src/liste_categorie/entities/liste_categorie.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -16,8 +15,6 @@ export class TodoListService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
 
-    @InjectRepository(ListeCategorie)
-    private categorieRepository: Repository<ListeCategorie>,
   ) {}
 
   private async findTodoOrFail(id: number, userId: number): Promise<TodoList> {
@@ -36,18 +33,11 @@ export class TodoListService {
     if (!user) {
       throw new NotFoundException('Utilisateur non trouvé');
     }
-    const categorie = await this.categorieRepository.findOne({
-      where: { id: createTodoDto.categorieId },
-    });
-    if (!categorie) {
-      throw new NotFoundException('Catégorie non trouvée');
-    }
   
     const todo = this.todoRepository.create({
       title: createTodoDto.title,
-      description: createTodoDto.description,
-      user,
-      categorie,
+      categorie: createTodoDto.categorie,
+      user
     });
     return this.todoRepository.save(todo);
   }

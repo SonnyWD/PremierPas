@@ -4,10 +4,9 @@ import { TodoListController } from './todo_list.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoList } from './entities/todo_list.entity';
 import { User } from 'src/users/entities/user.entity';
-import { ListeCategorie } from 'src/liste_categorie/entities/liste_categorie.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([TodoList, User, ListeCategorie])],
+  imports: [TypeOrmModule.forFeature([TodoList, User])],
   controllers: [TodoListController],
   providers: [TodoListService],
   exports: [TypeOrmModule, TodoListService]

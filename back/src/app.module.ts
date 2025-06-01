@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
 import { PregnancyModule } from './pregnancy/pregnancy.module';
@@ -28,9 +27,7 @@ import { AnswerForm } from './answer_form/entities/answer_form.entity';
 import { QuizModule } from './quiz/quiz.module';
 import { Quiz } from './quiz/entities/quiz.entity';
 import { TodoListModule } from './todo_list/todo_list.module';
-import { ListeCategorieModule } from './liste_categorie/liste_categorie.module';
 import { TodoList } from './todo_list/entities/todo_list.entity';
-import { ListeCategorie } from './liste_categorie/entities/liste_categorie.entity';
 import { PublicationModule } from './publication/publication.module';
 import { Publication } from './publication/entities/publication.entity';
 import { LikePublicationModule } from './like_publication/like_publication.module';
@@ -62,7 +59,7 @@ import { AccessContent } from './access_content/entities/access_content.entity';
       username: 'root',
       password: 'rootroot',
       database: 'premiers_pas',
-      entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, ListeCategorie, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question, Tool, AccessContent],
+      entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question, Tool, AccessContent],
       synchronize: true, // à mettre à false en production
       driver: require('mysql2')
     }),
@@ -77,7 +74,6 @@ import { AccessContent } from './access_content/entities/access_content.entity';
     AnswerFormModule,
     QuizModule,
     TodoListModule,
-    ListeCategorieModule,
     PublicationModule,
     LikePublicationModule,
     CommentsModule,

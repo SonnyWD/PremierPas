@@ -14,7 +14,6 @@ import { Message } from 'src/messages/entities/message.entity';
 import { Sponsorship } from 'src/sponsorship/entities/sponsorship.entity';
 import { LikePublication } from 'src/like_publication/entities/like_publication.entity';
 import { LikeComment } from 'src/like_comment/entities/like_comment.entity';
-import { ListeCategorie } from 'src/liste_categorie/entities/liste_categorie.entity';
 import { Tool } from 'src/tools/entities/tool.entity';
 import { AccessContent } from 'src/access_content/entities/access_content.entity';
 
@@ -70,7 +69,6 @@ export class User {
     @Column({ type: 'datetime', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     lastLogOut: Date;
 
-    // rajouter mes relations ici 
      @OneToMany(() => Pregnancy, (pregnancy) => pregnancy.user)
      pregnancies: Pregnancy[];
 
@@ -91,9 +89,6 @@ export class User {
 
      @OneToMany(() => TodoList, (todos) => todos.user)
      todos: TodoList[];
-
-     @OneToMany(() => ListeCategorie, (categorie) => categorie.user)
-     categories: ListeCategorie[];
 
      @OneToMany(() => LikePublication, (likePublication) => likePublication.user)
      likePublication: LikePublication[];

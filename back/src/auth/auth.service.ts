@@ -24,8 +24,18 @@ export class AuthService {
     if (!isPasswordValid) {
     throw new BadRequestException('Email ou mot de passe incorrect');
     }
+    const now = new Date();
+  
+    const isPremium = user.premiumUntil ? user.premiumUntil.getTime() > now.getTime() : false;
 
-    const payload = { email: user.email, sub: user.id,roles: user.roles }; 
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      roles: user.roles,
+      type_profil: user.type_profil, 
+      isPremium: isPremium,         
+    };
+    
     const accessToken = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET_KEY,  
       expiresIn: '10h'

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "./input";
 
-function PasswordInput({ value, onChange }) {
+function PasswordInput({ value, onChange, showHint = true }) {
   const [touched, setTouched] = useState(false);
 
   const criteria = [
@@ -35,7 +35,7 @@ function PasswordInput({ value, onChange }) {
         }}
         onBlur={() => setTouched(true)}
       />
-      {touched && (
+      {touched && showHint && (
         <ul className="text-sm space-y-1">
           {criteria.map((criteria, i) => (
             <li key={i} className={criteria.test(value) ? "text-green-600" : "text-red-600"}>
