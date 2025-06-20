@@ -1,3 +1,5 @@
+import { BabyDaily } from 'src/baby_daily/entities/baby_daily.entity';
+import { BabyMeasure } from 'src/baby_measure/entities/baby_measure.entity';
 import { MedicalAppointement } from 'src/medical_appointement/entities/medical_appointement.entity';
 import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
@@ -13,24 +15,16 @@ export class Baby {
     @Column({ type: 'varchar', nullable: true, default: ''})
     firstName: string;
 
-    @Column({ type: 'int', nullable: true})
-    size: number;
-
-    @Column({ type: 'decimal', nullable: true})
-    weight: number;
-
-    @Column({ type: 'timestamp', nullable: true})
-    lastLaunch: Date;
-
-    @Column({ type: 'time', nullable: true})
-    sleepDuration: string;
-
-    @Column({ type: 'decimal', nullable: true})
-    temperature: number;
-
     @ManyToOne(() => Pregnancy, (pregnancy) => pregnancy.babies, { nullable: true })
     pregnancy: Pregnancy;
 
     @OneToMany(() => MedicalAppointement, (medicalAppointement) => medicalAppointement.baby)
     medicalAppointments: MedicalAppointement;
+
+    @OneToMany(() => BabyMeasure, measure => measure.baby)
+    measures: BabyMeasure[];
+
+    @OneToMany(() => BabyDaily, daily => daily.baby)
+    daily: BabyDaily[];
+
 }

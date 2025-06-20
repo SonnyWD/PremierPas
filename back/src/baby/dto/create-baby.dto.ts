@@ -13,19 +13,4 @@ export class CreateBabyDto {
     @IsNotEmpty()
     pregnancyId: number;  
 
-    @IsNumber()
-    @IsOptional()
-    size?: number;
-
-    @IsNumber()
-    @IsOptional()
-    weight?: number;
-
-    @IsString()
-    @IsOptional()
-    sleepDuration?: string;
-
-    @IsNumber()
-    @IsOptional()
-    temperature?: number;
   }

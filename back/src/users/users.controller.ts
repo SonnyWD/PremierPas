@@ -13,11 +13,6 @@ import { RequestWithUser } from 'src/common/interfaces/request-with-user.interfa
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  createUser(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
-
   @Post('update-points')  
   async updatePoints(@Req() req: RequestWithUser) {
     const user = req.user as any;
@@ -33,7 +28,8 @@ export class UsersController {
       return this.usersService.addFavoriteTool(req.user.id, toolId);
   }
 
-  @Roles(Role.ADMIN, Role.USER)
+  @UseGuards(RolesGuard)
+  @Roles(Role.ADMIN)
   @Get()
   findAll() {
     return this.usersService.findAllUsers();

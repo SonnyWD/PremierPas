@@ -74,17 +74,19 @@ export class UsersService {
 
   public async findUser(id: number) {
     const user = await this.userRepository.findOne({
-      where: { id: id}
+      where: { id: id},
+      relations: ['pregnancies', 'pregnancies.babies']
     });
     if (!user) {
       throw new BadRequestException('Utilisateur introuvable')
     }
     return user;
   }
-
+  
   public async findUserByEmail(email: string){
     const user = await this.userRepository.findOne({
-      where: { email: email}
+      where: { email: email},
+      relations: ['pregnancies', 'pregnancies.babies']
     });
     if (!user) {
       throw new BadRequestException('Utilisateur introuvable')

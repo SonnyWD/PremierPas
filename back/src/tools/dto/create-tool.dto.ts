@@ -16,4 +16,8 @@ export class CreateToolDto {
       @IsString()
       @IsNotEmpty()
       path: string;
+
+      @IsString()
+      @IsNotEmpty()
+      keywords: string;
 }

@@ -20,7 +20,7 @@ export class BabyController {
   }
 
   @Get()
-  @Roles(Role.ADMIN)
+  @Roles(Role.USER, Role.ADMIN)
   findAll() {
     return this.babyService.findAllBabies();
   }

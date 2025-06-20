@@ -23,6 +23,11 @@ export class PregnancyController {
     return this.pregnancyService.findAllPregnancies(req.user.id);
   }
 
+  @Get('active')
+  getActivePregnancy(@Request() req) {
+  return this.pregnancyService.findActivePregnancy(req.user.id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number,  @Request() req) {
     return this.pregnancyService.findOnePregnancy(req.user.id, id);

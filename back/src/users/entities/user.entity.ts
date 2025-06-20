@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable} from 'typeorm';
 import { Exclude } from 'class-transformer'
 import { UserRole } from '../roles/user-role.enum';
-import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
+import { Pregnancy, PregnancyStatus } from 'src/pregnancy/entities/pregnancy.entity';
 import { MedicalAppointement } from 'src/medical_appointement/entities/medical_appointement.entity';
 import { Mood } from 'src/mood/entities/mood.entity';
 import { MediaBaby } from 'src/media_baby/entities/media_baby.entity';
@@ -113,7 +113,6 @@ export class User {
 
      @OneToMany(() => Sponsorship, (sponsorship) => sponsorship.sponsored)
      sponsored: Sponsorship[];
-     roles: any;
 
      @OneToMany(() => AccessContent, (access) => access.user)
      access: AccessContent[];
@@ -121,4 +120,9 @@ export class User {
      @ManyToMany(() => Tool, (tool) => tool.users)
      @JoinTable({ name: 'user_favorite_tools_tool' })
      favoriteTools: Tool[];
+
+     get activePregnancy(): Pregnancy | undefined {
+        
+        return this.pregnancies?.find(p => p.status === PregnancyStatus.IN_PROGRESS);
+    }
 }

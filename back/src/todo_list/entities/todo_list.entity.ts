@@ -1,21 +1,27 @@
 import { User } from 'src/users/entities/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index } from 'typeorm';
 
-@Entity()
-export class TodoList {
+@Entity('user_todo') 
+@Index(["user", "suggestedTodoKey"], { unique: true, where: "suggestedTodoKey IS NOT NULL" })
+export class TodoList { 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: 'varchar'})
-    categorie: string;
-
-    @Column({ type: 'varchar'})
+    @Column({ type: 'varchar', length: 255 })
     title: string;
 
-    @Column({ type: 'boolean', default: false }) 
+    @Column({ type: 'text', nullable: true })
+    description: string;
+
+    @Column({ type: 'boolean', default: false })
     completed: boolean;
 
-    @ManyToOne(() => User, (user) => user.todos)
-    user: User;
+    @Column({ type: 'boolean', default: true })
+    isCustom: boolean; 
 
+    @Column({ type: 'int', nullable: true }) 
+    suggestedTodoKey: number | null; 
+
+    @ManyToOne(() => User, (user) => user.todos) 
+    user: User;
 }

@@ -1,5 +1,5 @@
 import { MedicalAppointement } from 'src/medical_appointement/entities/medical_appointement.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class AppointementType {

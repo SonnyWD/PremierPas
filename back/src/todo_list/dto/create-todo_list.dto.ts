@@ -1,11 +1,12 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, MaxLength } from 'class-validator';
 
 export class CreateTodoListDto {
   @IsString()
   @IsNotEmpty()
+  @MaxLength(255)
   title: string;
 
   @IsString()
-  @IsNotEmpty()
-  categorie: string;
+  @IsOptional()
+  description?: string;
 }

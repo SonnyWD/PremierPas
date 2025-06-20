@@ -18,6 +18,9 @@ export class Tool {
   @Column()
   path: string;
 
+  @Column()
+  keywords: string;
+
   @ManyToMany(() => User, (user) => user.favoriteTools)
   users: User[];
 }

@@ -46,6 +46,10 @@ import { ToolsModule } from './tools/tools.module';
 import { Tool } from './tools/entities/tool.entity';
 import { AccessContentModule } from './access_content/access_content.module';
 import { AccessContent } from './access_content/entities/access_content.entity';
+import { BabyMeasureModule } from './baby_measure/baby_measure.module';
+import { BabyDailyModule } from './baby_daily/baby_daily.module';
+import { BabyMeasure } from './baby_measure/entities/baby_measure.entity';
+import { BabyDaily } from './baby_daily/entities/baby_daily.entity';
 
 @Module({
   imports: [
@@ -59,7 +63,7 @@ import { AccessContent } from './access_content/entities/access_content.entity';
       username: 'root',
       password: 'rootroot',
       database: 'premiers_pas',
-      entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question, Tool, AccessContent],
+      entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question, Tool, AccessContent, BabyMeasure, BabyDaily],
       synchronize: true, // à mettre à false en production
       driver: require('mysql2')
     }),
@@ -83,6 +87,8 @@ import { AccessContent } from './access_content/entities/access_content.entity';
     QuestionsModule,
     ToolsModule,
     AccessContentModule,
+    BabyMeasureModule,
+    BabyDailyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

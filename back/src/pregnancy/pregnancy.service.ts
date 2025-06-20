@@ -27,8 +27,6 @@ export class PregnancyService {
     return await this.pregnancyRepository.save(newPregnancy);
   }
 
- // Créer le DTO pour vérifier que les dates de termes et de début sont correct
-
 async updatePregnancy(userId: number, pregnancyId: number, updatePregnancyDto: UpdatePregnancyDto){
   const pregnancy = await this.findPregnancy(pregnancyId, userId)
 
@@ -51,6 +49,15 @@ async updatePregnancy(userId: number, pregnancyId: number, updatePregnancyDto: U
 
   async findOnePregnancy(userId: number, pregnancyId: number): Promise<Pregnancy> {
     return await this.findPregnancy(userId, pregnancyId);
+  }
+
+  async findActivePregnancy(userId: number) {
+    return await this.pregnancyRepository.findOne({
+      where: {
+        user: { id: userId },
+        status: PregnancyStatus.IN_PROGRESS,
+      },
+    });
   }
 
   private async findPregnancy(userId: number, pregnancyId: number){

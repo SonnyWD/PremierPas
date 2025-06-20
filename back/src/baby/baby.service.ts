@@ -17,7 +17,7 @@ export class BabyService {
   ) {}
 
   async createBaby(createBabyDto: CreateBabyDto) {
-    const { firstName, birthDate, pregnancyId, size, weight, sleepDuration, temperature } = createBabyDto;
+    const { firstName, birthDate, pregnancyId} = createBabyDto;
 
    
     const pregnancy = await this.pregnancyRepository.findOne({ where: { id: pregnancyId } });
@@ -30,10 +30,6 @@ export class BabyService {
       firstName,
       birthDate,
       pregnancy,  
-      size,
-      weight,
-      sleepDuration,
-      temperature,
     });
 
     
@@ -43,12 +39,13 @@ export class BabyService {
   }
 
   async findAllBabies(): Promise<Baby[]> {
-    return await this.babyRepository.find()
+    return await this.babyRepository.find({ relations: ['pregnancy'] })
   }
 
   async findOneBaby(id: number): Promise<Baby> {
     const baby = await this.babyRepository.findOne({
-      where: { id }
+      where: { id },
+      relations: ['measures', 'daily']
     });
 
     if(!baby) {

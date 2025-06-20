@@ -5,6 +5,7 @@ import { User } from '../users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import * as bcrypt from 'bcrypt';
+import { Role } from './role.enum';
 
 @Injectable()
 export class AuthService {
@@ -28,12 +29,32 @@ export class AuthService {
   
     const isPremium = user.premiumUntil ? user.premiumUntil.getTime() > now.getTime() : false;
 
+    let userRole: Role;
+    switch (user.type_profil) {
+      case 'femme_enceinte':
+      case 'parent':
+      case 'autre':
+        userRole = Role.USER; 
+        break;
+      default:
+        userRole = Role.USER; 
+    }
+
+    let activeBabyId: number | null = null;
+    const activePregnancy = user.activePregnancy;
+
+    if (activePregnancy && activePregnancy.babies && activePregnancy.babies.length > 0) {
+        activeBabyId = activePregnancy.babies[0].id;
+    }
+    
+    
     const payload = {
       email: user.email,
       sub: user.id,
-      roles: user.roles,
+      roles: user.role,
       type_profil: user.type_profil, 
-      isPremium: isPremium,         
+      isPremium: isPremium,
+      babyId: activeBabyId,       
     };
     
     const accessToken = await this.jwtService.signAsync(payload, {
