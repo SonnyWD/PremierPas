@@ -1,0 +1,21 @@
+import axios from "axios";
+
+const API_URL = "http://localhost:3000";
+const getToken = () => localStorage.getItem("token");
+
+export const fetchBabyData = async (babyId) => {
+    if (!babyId) { 
+        throw new Error("L'ID du bébé est nécessaire pour récupérer les données.");
+    }
+    try {
+        const response = await axios.get(`${API_URL}/baby/${babyId}`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        });
+        return response.data;
+    } catch(error) {
+        console.log("Erreur lors de la récupération des datas du bébé", error.response ? error.response.data : error.message);
+        throw error;
+    }
+}

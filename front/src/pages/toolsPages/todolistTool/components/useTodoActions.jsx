@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDeleteTodo } from '../useDeleteTodo';
+import { useDeleteTodo } from '../hooks/useDeleteTodo';
 
 function useTodoActions(todos, setTodos) {
   const [isDeleting, setIsDeleting] = useState(false); 

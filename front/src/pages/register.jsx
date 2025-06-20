@@ -62,8 +62,8 @@ function Register() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-orange-50 px-4">
-      <h1 className="text-2xl font-semibold mb-6">Inscription</h1>
+    <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#FFF6EB] from-[0%] via-[#FFF6EB] via-[35.2%] to-[#FCE4B7] to-[100%] pt-10 bg-fixed px-4 px-4">
+      <h1 className="text-2xl font-semibold mb-6 mr-auto">Inscription</h1>
       <form className="container w-full max-w-sm flex flex-col gap-4" onSubmit={handleSubmit}>
 
         <Input
@@ -71,6 +71,7 @@ function Register() {
         placeholder="Nom"
         value={nom}
         onChange={(e) => setNom(e.target.value)} 
+        className="bg-yellow rounded-full mb-2"
         />
 
         <Input
@@ -78,6 +79,7 @@ function Register() {
         placeholder="Prénom"
         value={prenom}
         onChange={(e) => setPrenom(e.target.value)} 
+        className="bg-yellow rounded-full mb-2"
         />
 
         <Input
@@ -85,6 +87,7 @@ function Register() {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)} 
+        className="bg-yellow rounded-full mb-2"
         />
 
         <PasswordInput
@@ -97,18 +100,19 @@ function Register() {
         placeholder="Confirmez le mot de passe"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)} 
+        className="bg-yellow rounded-full my-2"
         />
 
         <div className="submit-btn flex justify-center">
-          <Btn type="submit" className="w-full px-4 py-2 bg-blue-300 hover:bg-blue-400 text-white rounded font-medium text-base transition">S'inscrire</Btn>
+          <Btn type="submit" className="w-full px-4 py-[15px] text-orange-text rounded-full text-xs transition text-bold" variant="secondary">S'inscrire</Btn>
         </div>
       </form>
-      <Btn
+      <button
       onClick={() => navigate("/")}
-      className="px-4 py-2 text-gray-700"
+      className="px-4 py-2 text-bleu-clair text-xs text-bold mr-auto mt-2"
     >
       ← Retour
-      </Btn>
+      </button>
     </div>
   );
 }

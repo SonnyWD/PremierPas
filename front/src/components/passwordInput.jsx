@@ -27,7 +27,8 @@ function PasswordInput({ value, onChange, showHint = true }) {
     <div className="flex flex-col gap-2">
       <Input
         type="password"
-        placeholder="Mot de passe"
+        className="bg-yellow rounded-full"
+        placeholder="**************"
         value={value}
         onChange={(e) => {
           onChange(e);

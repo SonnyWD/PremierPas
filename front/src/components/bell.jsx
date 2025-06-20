@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { BiSolidBellRing } from "react-icons/bi";
+
 function Bell({className}){
     return(
         <button className={className}>
-            <FontAwesomeIcon icon={faBell} />
+            <BiSolidBellRing className="text-bleu-turquoise h-10 w-10 rounded-full p-2"/>
         </button>
     )
 }

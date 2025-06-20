@@ -4,6 +4,8 @@ import { useUser } from "../../context/userContext";
 import { BsListCheck, BsCalendarHeart } from "react-icons/bs";
 import { TbMoodPuzzled } from "react-icons/tb";
 import { LuBaby } from "react-icons/lu";
+import { FaBell, FaPuzzlePiece } from "react-icons/fa";
+import { IoIosMusicalNote } from "react-icons/io";
 
 const premiumContents = ['swipe']; 
 
@@ -12,6 +14,9 @@ const iconMapping = {
   BsCalendarHeart,
   LuBaby,
   TbMoodPuzzled,
+  FaBell,
+  FaPuzzlePiece,
+  IoIosMusicalNote
 }; 
 
 export function useTools() {
@@ -31,7 +36,8 @@ export function useTools() {
         const toolsWithIcons = allTools.map(tool => ({
           ...tool,
           icon: iconMapping[tool.iconName] || null,
-          locked: premiumContents.includes(tool.path) && !isPremium,
+          keywords: JSON.parse(tool.keywords),
+          //locked: premiumContents.includes(tool.path) && !isPremium,
         }));
 
         setTools(toolsWithIcons);
@@ -73,7 +79,7 @@ export function useTools() {
   };
 
   return {
-    toolsToDisplay,
+    tools,
     favoriteIds,
     toggleFavorite,
     showFavorites,

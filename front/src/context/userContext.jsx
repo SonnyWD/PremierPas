@@ -17,6 +17,7 @@ export const UserProvider = ({ children }) => {
           email: parsedUser.email,
           type_profil: parsedUser.type_profil,
           isPremium: parsedUser.isPremium,
+          babyId: parsedUser.babyId,
         };
         setUser(userForContext);
       } 

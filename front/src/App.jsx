@@ -4,15 +4,18 @@ import Register from "./pages/register";
 import Home from "./pages/home";
 import MainLayout from "./assets/mainLayout";
 import Tools from "./pages/toolsPages";
-import Discover from "./pages/discover";
-import UserProfile from "./pages/userProfile";
+import Discover from "./pages/discoverPages/discover";
+import UserProfile from "./pages/userProfilePages/userProfile";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; 
 import TodosList from "./pages/toolsPages/todolistTool/todoList";
-import Baby from "./pages/toolsPages/babyTool.jsx/baby";
-import Mood from "./pages/toolsPages/moodTool.jsx/mood";
+import Baby from "./pages/toolsPages/babyTool/baby";
+import Mood from "./pages/toolsPages/moodTool/mood";
 import PrivateRoute from "./services/privateRoute";
 import { UserProvider } from "./context/userContext";
+import Welcome from "./pages/welcomePages/welcome";
+import Community from "./pages/communityPages/community";
+import BabyFeed from "./pages/toolsPages/babyTool/babyFeed";
 
 function App() {
 
@@ -28,12 +31,18 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route element={<PrivateRoute />}>
-            <Route path="/tools" element={<Tools/>}/>
+            <Route path="/welcome" element={<Welcome/>}/>
+
+            <Route path="/tools" element={<Tools />}/>
+            <Route path="tools/todolist" element={<TodosList />} />
+
+            <Route path="tools/baby" element={<Baby />} />
+            <Route path="/tools/baby/feed" element={<BabyFeed />}/>
+            <Route path="tools/mood" element={<Mood />} />
+            
             <Route path="/discover" element={<Discover/>}/>
             <Route path="/userProfile" element={<UserProfile/>}/>
-            <Route path="/todolist" element={<TodosList />} />
-            <Route path="/baby" element={<Baby />} />
-            <Route path="/mood" element={<Mood />} />
+            <Route path="/community" element={<Community />} />
 
             </Route>
           </Routes>

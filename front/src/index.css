@@ -1,4 +1,116 @@
 @import "tailwindcss";
-/*body {
-    padding-bottom: calc(4rem); 
-  }
+
+
+@theme {
+  --color-primary-bg: #FFF6EB;
+  --color-secondary-bg: #607A8B;
+  --font-title-primary: 'Baloo', cursive;
+  --font-title-secondary: 'Varela Round', sans-serif;
+  --font-primary-text: 'Zen Kurenaido', sans-serif;
+  --font-secondary-text: 'Noto Serif', serif;
+  --font-primary-cta: 'Quicksand', sans-serif;
+  --font-secondary-tca: 'Poppins', sans-serif;
+  --color-yellow: #FADB9B;
+  --color-orange: #E7AD7A;
+  --color-orange2: #F5D9BE;
+  --color-orange-ombre: #EFC7A2;
+  --color-orange-text: #965A23;
+  --color-bleu-clair: #275C70;
+  --color-bleu-clair2: #C5DCD9; 
+  --color-bleu-turquoise: #6DB5BD;
+  --color-orange-clair: #F8E0C9;
+  --color-gray: #A4AFB7;
+  --color-gray2: #BFC4C5;
+  --color-yellow-40: #FDEBCB;
+  --shadow-glow-yellow: 0 0 10px 1px var(--color-yellow);
+  --color-yellow-hover: #FCE4B7;
+
+}
+
+/*.bg-body {
+  background-color: var(--primary-bg-color);
+}
+
+.yellow {
+  background-color: var(--color-yellow);
+}
+
+.btn-border-orange-1{
+  border-color: var(--color-orange-1);
+  
+}
+
+.title-2 {
+  font-family: var(--secondary-title-font);
+}
+
+.text-1 {
+  font-family: var(--primary-text-font);
+}*/
+
+h1, h2, h3 {
+  font-family: var(--font-title-primary);
+  color: var(--color-bleu-clair);
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.title-black {
+  color: black;
+}
+
+.title-orange {
+  color: var(--color-orange-text);
+}
+
+.title-bleu {
+  color: var(--color-bleu-clair)
+}
+.title-orange2 {
+  color: var(--color-orange);
+}
+
+.font-title-h3 {
+  color: white;
+}
+
+.font-title-secondary {
+  font-family: var(--font-title-secondary);
+}
+
+.gray-second {
+  background-color: rgba(164, 175, 183, 0.5);
+}
+
+.override-shadow {
+  box-shadow: -4px 1px 2.2px 0px var(--color-orange);
+  color: var(--color-bleu-clair);
+  font-weight: 400;
+}
+
+.override-shadow2 {
+  box-shadow: -4px 1px 2.2px 0px #6DB5BD;
+  font-weight: 400;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+}
