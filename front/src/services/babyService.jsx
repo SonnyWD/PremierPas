@@ -8,7 +8,7 @@ export const fetchBabyData = async (babyId) => {
         throw new Error("L'ID du bébé est nécessaire pour récupérer les données.");
     }
     try {
-        const response = await axios.get(`${apiUrl}/baby/${babyId}`.replace(/([^:]\/)\/+/g, '$1'), {
+        const response = await axios.get(`${apiUrl}/baby/me`.replace(/([^:]\/)\/+/g, '$1'), {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
