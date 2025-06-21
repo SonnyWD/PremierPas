@@ -33,7 +33,7 @@ function Register() {
         return;
       }
     
-    const apiUrl = import.meta.env.VITE_API_URL;
+    const apiUrl = import.meta.env.VITE_API_URL.replace(/\/$/, '');
       
     try {
       const response = await fetch(`${apiUrl}/auth/register`, {

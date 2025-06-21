@@ -67,7 +67,8 @@ useEffect(() => {
     }
 
     try {
-      const response = await fetch(`${apiUrl.replace(/\/$/, '')}/auth/login`, {
+      console.log('URL fetch:', apiUrl);
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
