@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsEmail, IsObject, IsOptional, MinLength, Matches } from 'class-validator';
+import { IsString, IsDate, IsEmail, IsObject, IsOptional, MinLength, Matches, IsEnum } from 'class-validator';
 
 export class CreateUserDto {
     @IsString()
@@ -22,10 +22,14 @@ export class CreateUserDto {
     @MinLength(8, { message: 'Le mot de passe doit contenir au moins 8 caractères' })
     @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
     message: 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre'
-  })
+    })
     mot_de_passe: string;
 
     @IsObject()
     @IsOptional()
     suggested_name: object;
+
+    @IsEnum(['femme_enceinte', 'parent', 'autre'])
+    @IsOptional()
+    type_profil?: 'femme_enceinte' | 'parent' | 'autre';
 }

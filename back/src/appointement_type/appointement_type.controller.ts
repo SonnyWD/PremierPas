@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Param, Patch, Request, Delete, UseGuards } from '@nestjs/common';
-import { AppointmentTypeService } from './appointement_type.service';
+import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
+import { AppointementTypeService } from './appointement_type.service';
 import { CreateAppointmentTypeDto } from './dto/create-appointement_type.dto';
 import { UpdateAppointementTypeDto } from './dto/update-appointement_type.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -10,7 +10,7 @@ import { Role } from 'src/auth/role.enum';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('appointement-type')
 export class AppointementTypeController {
-  constructor(private readonly appointementTypeService: AppointmentTypeService) {}
+  constructor(private readonly appointementTypeService: AppointementTypeService) {}
 
   @Post()
   @Roles(Role.USER, Role.ADMIN)

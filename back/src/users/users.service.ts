@@ -32,7 +32,8 @@ export class UsersService {
     const newUser = new User();
     Object.assign(newUser, {
       ...createUserDto,
-      mot_de_passe: hashedPassword
+      mot_de_passe: hashedPassword,
+      type_profil: createUserDto.type_profil ?? 'femme_enceinte',
     });
       
     const savedUser = await this.userRepository.save(newUser);

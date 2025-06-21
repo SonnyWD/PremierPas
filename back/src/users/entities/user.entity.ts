@@ -63,7 +63,10 @@ export class User {
     @Column({ type: 'timestamptz', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     lastLogin: Date;
 
-    @Column({ type: 'enum', enum: ['femme_enceinte', 'parent', 'autre'] })
+    @Column({ type: 'enum', 
+        enum: ['femme_enceinte', 'parent', 'autre'],
+        default: 'femme_enceinte' 
+     })
     type_profil: 'femme_enceinte' | 'parent' | 'autre';
 
     @Column({ type: 'timestamptz', nullable: true, default: () => 'CURRENT_TIMESTAMP' })

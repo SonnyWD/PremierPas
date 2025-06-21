@@ -16,10 +16,10 @@ export class Message {
     @CreateDateColumn({ type: 'timestamp' })
     sendingDate: Date;
 
-    @Column({ default: false })
+    @Column({ type: 'boolean', default: false })
     isDeletedBySender: boolean;
 
-    @Column({ default: false })
+    @Column({ type: 'boolean', default: false })
     isDeletedByReceiver: boolean;
 
     @ManyToOne(() => User, (user) => user.sentMessages, { onDelete: 'CASCADE' })

@@ -1,13 +1,13 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AppointementType } from './entities/appointement_type.entity';
 import { CreateAppointmentTypeDto } from './dto/create-appointement_type.dto';
 import { UpdateAppointementTypeDto } from './dto/update-appointement_type.dto';
+import { AppointementType } from './entities/appointement_type.entity';
 
 @Injectable()
-export class AppointmentTypeService {
-  private readonly logger = new Logger(AppointmentTypeService.name);
+export class AppointementTypeService {
+  private readonly logger = new Logger(AppointementTypeService.name);
 
   constructor(
     @InjectRepository(AppointementType)
