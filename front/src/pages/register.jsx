@@ -32,7 +32,7 @@ function Register() {
         toast.error("Veuillez remplir tous les champs.");
         return;
       }
-    
+    const apiUrl = import.meta.env.VITE_API_URL;
     const url = `${apiUrl}/auth/register`.replace(/([^:]\/)\/+/g, '$1');
       
     try {
