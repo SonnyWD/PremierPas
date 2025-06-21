@@ -63,7 +63,7 @@ function Tools() {
 
   if (loading) return <p>Chargement...</p>;
   if (error) return <p>{error}</p>;
-
+  console.log({ allTools, filteredTools }); 
   return (
     <div className="min-h-screen bg-primary-bg pb-30 p-5 font-primary-text 
                     bg-gradient-to-b from-[#FFF6EB] from-[24.52%] via-[#F7DFC7] via-[84.13%] to-[#EFC7A2] to-[100%] bg-fixed">

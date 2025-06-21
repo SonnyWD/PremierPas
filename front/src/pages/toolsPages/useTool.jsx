@@ -39,7 +39,7 @@ export function useTools() {
           keywords: JSON.parse(tool.keywords),
           //locked: premiumContents.includes(tool.path) && !isPremium,
         }));
-
+        console.log("Tools data:", allTools);
         setTools(toolsWithIcons);
 
         const favoriteTools = await fetchFavoriteTools();

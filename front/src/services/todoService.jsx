@@ -5,7 +5,7 @@ const getToken = () => localStorage.getItem("token");
 
 export const fetchTodos = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/todos/suggested`, {
+    const response = await axios.get(`${apiUrl}/todos/suggested`.replace(/([^:]\/)\/+/g, '$1'), {
       headers: {
       Authorization: `Bearer ${getToken()}`
       }
@@ -19,7 +19,7 @@ export const fetchTodos = async () => {
 
 export const fetchTodosPersonalized = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/todos/user`, {
+    const response = await axios.get(`${apiUrl}/todos/user`.replace(/([^:]\/)\/+/g, '$1'), {
       headers: {
       Authorization: `Bearer ${getToken()}`
       }
@@ -35,7 +35,7 @@ export const addTodos = async (title, categorie) => {
   try {
     const todoData = { title, categorie }; 
     
-    const response = await axios.post(`${apiUrl}/todos/custom`, todoData, {
+    const response = await axios.post(`${apiUrl}/todos/custom`.replace(/([^:]\/)\/+/g, '$1'), todoData, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
         "Content-Type": "application/json"
@@ -50,7 +50,7 @@ export const addTodos = async (title, categorie) => {
 
 export const deleteTodo = async(id) => {
   try {
-    const response = await axios.delete(`${apiUrl}/todos/${id}`, {
+    const response = await axios.delete(`${apiUrl}/todos/${id}`.replace(/([^:]\/)\/+/g, '$1'), {
       headers: {
         Authorization: `Bearer ${getToken()}`
       }

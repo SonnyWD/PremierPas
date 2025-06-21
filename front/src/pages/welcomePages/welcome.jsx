@@ -22,11 +22,7 @@ function Welcome() {
     return <div>Chargement des informations de l'utilisateur...</div>;
   }
 
-  if (!user || !user.babyId) {
-    return <div>Aucun bébé trouvé pour l'utilisateur connecté ou informations manquantes.</div>;
-  }
-
-  const babyId = user.babyId;
+  const babyId = user?.babyId;
 
     return (
       <>

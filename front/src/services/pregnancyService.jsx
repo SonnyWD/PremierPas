@@ -9,7 +9,7 @@ export const fetchPregnancy = async () => {
         throw new Error("Token d'authentification manquant");
     }
     try {
-        const response = await axios.get(`${apiUrl}/pregnancy/active`, {
+        const response = await axios.get(`${apiUrl}/pregnancy/active`.replace(/([^:]\/)\/+/g, '$1'), {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
