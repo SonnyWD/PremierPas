@@ -14,7 +14,11 @@ export const AppDataSource = new DataSource({
     rejectUnauthorized: false,
   },
   logging: ['query', 'error'],
-  entities: ['src/**/entities/*.ts'],
-  migrations: ['src/migration/*.ts'],
+  entities: process.env.NODE_ENV === 'production'
+    ? ['dist/**/entities/*.js']     
+    : ['src/**/entities/*.ts'],   
+  migrations: process.env.NODE_ENV === 'production'
+    ? ['dist/migration/*.js']      
+    : ['src/migration/*.ts'],      
   synchronize: false,
 });
