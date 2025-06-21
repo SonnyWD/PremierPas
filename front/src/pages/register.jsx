@@ -62,7 +62,7 @@ function Register() {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#FFF6EB] from-[0%] via-[#FFF6EB] via-[35.2%] to-[#FCE4B7] to-[100%] pt-10 bg-fixed px-4 px-4">
+    <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#FFF6EB] from-[0%] via-[#FFF6EB] via-[35.2%] to-[#FCE4B7] to-[100%] pt-10 bg-fixed px-4">
       <h1 className="text-2xl font-semibold mb-6 mr-auto">Inscription</h1>
       <form className="container w-full max-w-sm flex flex-col gap-4" onSubmit={handleSubmit}>
 

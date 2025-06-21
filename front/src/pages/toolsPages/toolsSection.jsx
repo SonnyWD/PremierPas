@@ -1,5 +1,5 @@
 import Section from "../../components/section";
-import ToolCard from "./ToolCard";
+import ToolCard from "./toolCard";
 
 function ToolsSection({ tools, toggleFavorite, favoriteIds}) {
   return (
