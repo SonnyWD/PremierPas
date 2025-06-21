@@ -25,6 +25,13 @@ export class BabyController {
     return this.babyService.findAllBabies();
   }
 
+  @Get('me')
+  @Roles(Role.USER, Role.ADMIN)
+  async getMyBaby(@Req() req: RequestWithUser) {
+    const userId = req.user.id;
+    return this.babyService.findBabyByUserId(userId);
+  }
+
   @Patch(':id')
   @Roles(Role.USER, Role.ADMIN)
   update(@Param('id') id: string, @Body() updateBabyDto: UpdateBabyDto) {

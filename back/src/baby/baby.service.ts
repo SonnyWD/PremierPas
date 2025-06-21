@@ -3,7 +3,7 @@ import { CreateBabyDto } from './dto/create-baby.dto';
 import { UpdateBabyDto } from './dto/update-baby.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Baby } from './entities/baby.entity';
-import { Pregnancy } from '../pregnancy/entities/pregnancy.entity';
+import { Pregnancy, PregnancyStatus } from '../pregnancy/entities/pregnancy.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -38,6 +38,27 @@ export class BabyService {
     return { message: "Bébé créé avec succès." };
   }
 
+  async findBabyByUserId(userId: number): Promise<Baby> {
+    const activePregnancy = await this.pregnancyRepository.findOne({
+      where: { user: { id: userId }, status: PregnancyStatus.IN_PROGRESS },
+    });
+
+    if (!activePregnancy) {
+      throw new NotFoundException(`Aucune grossesse active trouvée pour l'utilisateur ${userId}`);
+    }
+
+    const baby = await this.babyRepository.findOne({
+      where: { pregnancy: { id: activePregnancy.id } },
+      relations: ['pregnancy'],
+    });
+
+    if (!baby) {
+      throw new NotFoundException(`Aucun bébé trouvé pour la grossesse ${activePregnancy.id}`);
+    }
+
+    return baby;
+  }
+  
   async findAllBabies(): Promise<Baby[]> {
     return await this.babyRepository.find({ relations: ['pregnancy'] })
   }
