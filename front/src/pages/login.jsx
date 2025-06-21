@@ -12,7 +12,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
+const url = `${apiUrl}/auth/login`.replace(/([^:]\/)\/+/g, '$1');
 
 useEffect(() => {
 
@@ -68,7 +69,7 @@ useEffect(() => {
 
     try {
       console.log('URL fetch:', apiUrl);
-      const response = await fetch(`${apiUrl}/auth/login`, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
