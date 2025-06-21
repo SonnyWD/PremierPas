@@ -3,10 +3,7 @@ import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 const getToken = () => localStorage.getItem("token");
 
-export const fetchBabyData = async (babyId) => {
-    if (!babyId) { 
-        throw new Error("L'ID du bébé est nécessaire pour récupérer les données.");
-    }
+export const fetchBabyData = async () => {
     try {
         const response = await axios.get(`${apiUrl}/baby/me`.replace(/([^:]\/)\/+/g, '$1'), {
             headers: {

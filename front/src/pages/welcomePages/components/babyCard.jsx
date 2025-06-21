@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchBabyData } from "../../../services/babyService";
 import baby from "../../../assets/img/baby.svg"
 
-function BabyCard({babyId}) {
+function BabyCard() {
 
     const [babyData, setBabyData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -10,13 +10,8 @@ function BabyCard({babyId}) {
 
     useEffect(() => {
         const fetchBabyDatas = async () => {
-            if (!babyId) {
-                    setError("L'ID du bébé n'est pas fourni ou n'est pas valide.");
-                    setLoading(false);
-                    return; 
-                }
             try {
-                const baby = await fetchBabyData(babyId);
+                const baby = await fetchBabyData();
                 setBabyData(baby);
                 setLoading(false);
             } catch(error) {
@@ -25,7 +20,7 @@ function BabyCard({babyId}) {
             }
         };
         fetchBabyDatas();
-    }, [babyId])
+    }, [])
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>{error}</div>;
