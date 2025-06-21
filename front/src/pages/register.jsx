@@ -33,10 +33,10 @@ function Register() {
         return;
       }
     
-    const apiUrl = import.meta.env.VITE_API_URL.replace(/\/$/, '');
+    const url = `${apiUrl}/auth/register`.replace(/([^:]\/)\/+/g, '$1');
       
     try {
-      const response = await fetch(`${apiUrl}/auth/register`, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
