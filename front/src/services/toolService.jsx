@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const apiUrl = import.meta.env.VITE_API_URL;
 const getToken = () => localStorage.getItem("token");
 
 export const fetchTools = async () => {
-  const response = await axios.get(`${API_URL}/tools`, {
+  const response = await axios.get(`${apiUrl}/tools`, {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }
@@ -13,7 +13,7 @@ export const fetchTools = async () => {
 };
 
 export const fetchFavoriteTools = async () => {
-  const response = await axios.get(`${API_URL}/users/me/favorites`, {
+  const response = await axios.get(`${apiUrl}/users/me/favorites`, {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }
@@ -23,7 +23,7 @@ export const fetchFavoriteTools = async () => {
 
 export const addFavoriteTool = async (toolId) => {
   await axios.post(
-    `${API_URL}/users/me/favorites`,
+    `${apiUrl}/users/me/favorites`,
     { toolId },
     {
       headers: {
@@ -34,7 +34,7 @@ export const addFavoriteTool = async (toolId) => {
 };
 
 export const removeFavoriteTool = async (toolId) => {
-  await axios.delete(`${API_URL}/users/me/favorites/${toolId}`, {
+  await axios.delete(`${apiUrl}/users/me/favorites/${toolId}`, {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }

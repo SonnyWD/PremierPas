@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const apiUrl = import.meta.env.VITE_API_URL;
 const getToken = () => localStorage.getItem("token");
 
 export const fetchPregnancy = async () => {
@@ -9,7 +9,7 @@ export const fetchPregnancy = async () => {
         throw new Error("Token d'authentification manquant");
     }
     try {
-        const response = await axios.get(`${API_URL}/pregnancy/active`, {
+        const response = await axios.get(`${apiUrl}/pregnancy/active`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }

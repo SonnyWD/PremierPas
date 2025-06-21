@@ -12,8 +12,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
 useEffect(() => {
-  // Attache le callback globalement
+
   window.handleGoogleSignIn = async (response) => {
     console.log('JWT reçu:', response.credential)
     try {
@@ -24,7 +26,7 @@ useEffect(() => {
       })
       const data = await res.json();
       if (res.ok) {
-        // Traiter la réponse OK ici (stockage token, navigate, etc.)
+
         localStorage.setItem('token', data.accessToken)
         toast.success('Connexion via Google réussie')
         navigate('/welcome')
@@ -47,7 +49,7 @@ useEffect(() => {
       { theme: "filled_white", size: "full", text: "signin_with", shape: "pill" }
     )
   }
-}, [navigate]) // Ajoute navigate ici dans les dépendances
+}, [navigate]) 
 
 
   const handleSubmit = async (e) => {
@@ -65,7 +67,7 @@ useEffect(() => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
