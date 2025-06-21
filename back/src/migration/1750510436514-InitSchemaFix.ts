@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class InitSchema1750508498375 implements MigrationInterface {
-    name = 'InitSchema1750508498375'
+export class InitSchemaFix1750510436514 implements MigrationInterface {
+    name = 'InitSchemaFix1750510436514'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "baby_daily" ("id" SERIAL NOT NULL, "dateRecorded" TIMESTAMP NOT NULL DEFAULT now(), "sleepDurationHours" numeric(4,2), "lastFeed" TIMESTAMP, "babyId" integer, CONSTRAINT "PK_46ac57113f528b7740cc74e9293" PRIMARY KEY ("id"))`);
@@ -17,7 +17,7 @@ export class InitSchema1750508498375 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "question" ("id" SERIAL NOT NULL, "questionText" text NOT NULL, "suggestions" json NOT NULL, "quizId" integer, CONSTRAINT "PK_21e5786aa0ea704ae185a79b2d5" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "quiz" ("id" SERIAL NOT NULL, "title" character varying NOT NULL, "theme" character varying NOT NULL, "userId" integer, CONSTRAINT "PK_422d974e7217414e029b3e641d0" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "user_todo" ("id" SERIAL NOT NULL, "title" character varying(255) NOT NULL, "description" text, "completed" boolean NOT NULL DEFAULT false, "isCustom" boolean NOT NULL DEFAULT true, "suggestedTodoKey" integer, "userId" integer, CONSTRAINT "PK_6c846304fe1cae810a0b08372f4" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE UNIQUE INDEX "IDX_be5a1fccc1f28b63566b5fdd5f" ON "user_todo" ("userId", "suggestedTodoKey") WHERE suggestedTodoKey IS NOT NULL`);
+        await queryRunner.query(`CREATE UNIQUE INDEX "IDX_be5a1fccc1f28b63566b5fdd5f" ON "user_todo" ("userId", "suggestedTodoKey") WHERE "suggestedTodoKey" IS NOT NULL`);
         await queryRunner.query(`CREATE TABLE "like_comment" ("id" SERIAL NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "commentId" integer, "userId" integer, CONSTRAINT "PK_307553e232b4620fde327c59eb5" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "comment" ("id" SERIAL NOT NULL, "content" text NOT NULL, "createdAt" TIMESTAMP NOT NULL, "userId" integer, "publicationId" integer, CONSTRAINT "PK_0b0e4bbc8415ec426f87f3a88e2" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "like_publication" ("id" SERIAL NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "publicationId" integer, "userId" integer, CONSTRAINT "PK_6d47f5d8f82d6a4c5be1b80e347" PRIMARY KEY ("id"))`);
