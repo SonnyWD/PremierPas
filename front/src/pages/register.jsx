@@ -34,7 +34,7 @@ function Register() {
       }
     const apiUrl = import.meta.env.VITE_API_URL;
     const url = `${apiUrl}/auth/register`.replace(/([^:]\/)\/+/g, '$1');
-      
+    console.log('Request URL:', url); 
     try {
       const response = await fetch(url, {
         method: "POST",
