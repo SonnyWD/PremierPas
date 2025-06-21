@@ -49,7 +49,7 @@ export class BabyService {
 
     const baby = await this.babyRepository.findOne({
       where: { pregnancy: { id: activePregnancy.id } },
-      relations: ['pregnancy'],
+      relations: ['pregnancy', 'measures'],
     });
 
     if (!baby) {
