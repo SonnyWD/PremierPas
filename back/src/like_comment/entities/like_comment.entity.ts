@@ -1,5 +1,5 @@
-import { Comment } from "src/comments/entities/comment.entity";
-import { User } from "src/users/entities/user.entity";
+import { Comment } from "../../comments/entities/comment.entity";
+import { User } from "../../users/entities/user.entity";
 import { CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -8,7 +8,7 @@ export class LikeComment {
     id: number;
 
     @CreateDateColumn()
-      createdAt: Date;
+    createdAt: Date;
 
     @ManyToOne(() => Comment, (comment) => comment.likeComment)
     comment: Comment;

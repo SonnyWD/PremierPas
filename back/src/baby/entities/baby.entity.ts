@@ -1,7 +1,7 @@
-import { BabyDaily } from 'src/baby_daily/entities/baby_daily.entity';
-import { BabyMeasure } from 'src/baby_measure/entities/baby_measure.entity';
-import { MedicalAppointement } from 'src/medical_appointement/entities/medical_appointement.entity';
-import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
+import { BabyDaily } from '../../baby_daily/entities/baby_daily.entity';
+import { BabyMeasure } from '../../baby_measure/entities/baby_measure.entity';
+import { MedicalAppointement } from '../../medical_appointement/entities/medical_appointement.entity';
+import { Pregnancy } from '../../pregnancy/entities/pregnancy.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
@@ -9,7 +9,7 @@ export class Baby {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'date', nullable: true})
+    @Column({ type: 'timestamp', nullable: true})
     birthDate: Date;
 
     @Column({ type: 'varchar', nullable: true, default: ''})

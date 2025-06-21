@@ -3,7 +3,7 @@ import { CreateBabyDailyDto} from './dto/create-baby_daily.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BabyDaily } from './entities/baby_daily.entity';
-import { Baby } from 'src/baby/entities/baby.entity';
+import { Baby } from '../baby/entities/baby.entity';
 
 @Injectable()
 export class BabyDailyService {

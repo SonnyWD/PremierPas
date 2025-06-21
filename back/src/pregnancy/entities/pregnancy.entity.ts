@@ -1,6 +1,6 @@
-import { Baby } from "src/baby/entities/baby.entity";
-import { MedicalAppointement } from "src/medical_appointement/entities/medical_appointement.entity";
-import { User } from "src/users/entities/user.entity";
+import { Baby } from "../../baby/entities/baby.entity";
+import { MedicalAppointement } from "../../medical_appointement/entities/medical_appointement.entity";
+import { User } from "../../users/entities/user.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 
 
@@ -14,10 +14,10 @@ export class Pregnancy {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'date'})
+    @Column({ type: 'timestamp'})
     startDate: Date;
 
-    @Column({ type: 'date', nullable: true})
+    @Column({ type: 'timestamp', nullable: true})
     dueDate: Date;
 
     @Column({ type: 'enum', enum: PregnancyStatus, default: PregnancyStatus.IN_PROGRESS})

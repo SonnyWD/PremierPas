@@ -1,9 +1,9 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LikePublication } from './entities/like_publication.entity';
 import { Repository } from 'typeorm';
-import { Publication } from 'src/publication/entities/publication.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Publication } from '../publication/entities/publication.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class LikePublicationService {

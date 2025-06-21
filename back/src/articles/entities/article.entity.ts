@@ -11,7 +11,7 @@ export class Article {
     @Column({ type: 'text'})
     content: string;
 
-    @Column({ type: 'date'})
+    @Column({ type: 'timestamp'})
     creationDate: Date;
 
     @Column({ type: 'varchar'})

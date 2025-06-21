@@ -4,7 +4,7 @@ import { UpdateMediaBabyDto } from './dto/update-media_baby.dto';
 import { MediaBaby } from './entities/media_baby.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { isOwnerOrAdmin } from 'src/permissions.util';
 
 @Injectable()

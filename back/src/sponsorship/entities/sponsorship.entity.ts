@@ -1,4 +1,4 @@
-import { User } from "src/users/entities/user.entity";
+import { User } from "../../users/entities/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm";
 
 @Entity()
@@ -6,7 +6,7 @@ export class Sponsorship {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'date'})
+    @Column({ type: 'timestamp'})
     sponsorshipDate: Date;
 
     @ManyToOne(() => User, (user) => user.sponsor)

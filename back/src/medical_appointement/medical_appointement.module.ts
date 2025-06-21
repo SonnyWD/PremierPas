@@ -3,9 +3,9 @@ import { MedicalAppointementService } from './medical_appointement.service';
 import { MedicalAppointementController } from './medical_appointement.controller';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { MedicalAppointement } from './entities/medical_appointement.entity';
-import { User } from 'src/users/entities/user.entity';
-import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
-import { Baby } from 'src/baby/entities/baby.entity';
+import { User } from '../users/entities/user.entity';
+import { Pregnancy } from '../pregnancy/entities/pregnancy.entity';
+import { Baby } from '../baby/entities/baby.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MedicalAppointement, User, Pregnancy, Baby])],

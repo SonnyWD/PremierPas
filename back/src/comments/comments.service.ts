@@ -1,11 +1,11 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
 import { Repository } from 'typeorm';
-import { Publication } from 'src/publication/entities/publication.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Publication } from '../publication/entities/publication.entity';
+import { User } from '../users/entities/user.entity';
 
 
 @Injectable()

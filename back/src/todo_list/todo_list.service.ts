@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TodoList } from './entities/todo_list.entity'; 
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateTodoListDto } from './dto/create-todo_list.dto'; 
 import { UpdateTodoListDto } from './dto/update-todo_list.dto'; 

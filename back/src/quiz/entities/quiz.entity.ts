@@ -1,5 +1,5 @@
-import { Question } from 'src/questions/entities/question.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Question } from '../../questions/entities/question.entity';
+import { User } from '../../users/entities/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

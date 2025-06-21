@@ -1,4 +1,4 @@
-import { Quiz } from "src/quiz/entities/quiz.entity";
+import { Quiz } from "../../quiz/entities/quiz.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

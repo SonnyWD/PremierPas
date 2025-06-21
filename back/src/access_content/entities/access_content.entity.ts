@@ -1,4 +1,4 @@
-import { User } from "src/users/entities/user.entity";
+import { User } from "../../users/entities/user.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -9,7 +9,7 @@ export class AccessContent {
     @Column({ type: 'int'})
     contentId: number;
 
-    @CreateDateColumn({ type: 'datetime'})
+    @CreateDateColumn({ type: 'timestamp'})
     dateDeblocage: Date;
 
     @ManyToOne(() => User, (user) => user.access)

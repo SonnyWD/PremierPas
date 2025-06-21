@@ -3,10 +3,10 @@ import { CreateMedicalAppointementDto } from './dto/create-medical_appointement.
 import { UpdateMedicalAppointementDto } from './dto/update-medical_appointement.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MedicalAppointement } from './entities/medical_appointement.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 import { Repository } from 'typeorm';
-import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
-import { Baby } from 'src/baby/entities/baby.entity';
+import { Pregnancy } from '../pregnancy/entities/pregnancy.entity';
+import { Baby } from '../baby/entities/baby.entity';
 
 @Injectable()
 export class MedicalAppointementService {

@@ -1,7 +1,7 @@
-import { AppointementType } from "src/appointement_type/entities/appointement_type.entity";
-import { Baby } from "src/baby/entities/baby.entity";
-import { Pregnancy } from "src/pregnancy/entities/pregnancy.entity";
-import { User } from "src/users/entities/user.entity";
+import { AppointementType } from "../../appointement_type/entities/appointement_type.entity";
+import { Baby } from "../../baby/entities/baby.entity";
+import { Pregnancy } from "../../pregnancy/entities/pregnancy.entity";
+import { User } from "../../users/entities/user.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
@@ -9,7 +9,7 @@ export class MedicalAppointement {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'timestamp' })
     date: Date;
 
     @Column({ type: 'time' })

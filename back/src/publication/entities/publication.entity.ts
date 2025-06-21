@@ -1,7 +1,7 @@
-import { Comment } from "src/comments/entities/comment.entity";
-import { LikePublication } from "src/like_publication/entities/like_publication.entity";
-import { User } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Comment } from "../../comments/entities/comment.entity";
+import { LikePublication } from "../../like_publication/entities/like_publication.entity";
+import { User } from "../../users/entities/user.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Publication {

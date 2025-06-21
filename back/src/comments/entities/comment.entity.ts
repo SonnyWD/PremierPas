@@ -1,6 +1,6 @@
-import { LikeComment } from "src/like_comment/entities/like_comment.entity";
-import { Publication } from "src/publication/entities/publication.entity";
-import { User } from "src/users/entities/user.entity";
+import { LikeComment } from "../../like_comment/entities/like_comment.entity";
+import { Publication } from "../../publication/entities/publication.entity";
+import { User } from "../../users/entities/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -11,7 +11,7 @@ export class Comment {
     @Column({ type: 'text'})
     content: string;
 
-    @Column({ type: 'date'})
+    @Column({ type: 'timestamp'})
     createdAt: Date;
 
     @ManyToOne(() => User, (user) => user.comments,{ eager: true, onDelete: 'CASCADE' })

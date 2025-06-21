@@ -1,5 +1,5 @@
-import { Publication } from "src/publication/entities/publication.entity";
-import { User } from "src/users/entities/user.entity";
+import { Publication } from "../../publication/entities/publication.entity";
+import { User } from "../../users/entities/user.entity";
 import { Entity, ManyToOne, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 
 @Entity()

@@ -1,11 +1,10 @@
 import { CreatePregnancyDto } from './dto/create-pregnancy.dto';
 import { UpdatePregnancyDto } from './dto/update-pregnancy.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { Pregnancy } from './entities/pregnancy.entity';
 import { Repository } from 'typeorm';
 import { PregnancyStatus } from './entities/pregnancy.entity';
-import { DeletePregnancyDto } from './dto/delete-pregnancy.dto';
 
 @Injectable()
 export class PregnancyService {

@@ -1,21 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable} from 'typeorm';
 import { Exclude } from 'class-transformer'
 import { UserRole } from '../roles/user-role.enum';
-import { Pregnancy, PregnancyStatus } from 'src/pregnancy/entities/pregnancy.entity';
-import { MedicalAppointement } from 'src/medical_appointement/entities/medical_appointement.entity';
-import { Mood } from 'src/mood/entities/mood.entity';
-import { MediaBaby } from 'src/media_baby/entities/media_baby.entity';
-import { AnswerForm } from 'src/answer_form/entities/answer_form.entity';
-import { Quiz } from 'src/quiz/entities/quiz.entity';
-import { TodoList } from 'src/todo_list/entities/todo_list.entity';
-import { Publication } from 'src/publication/entities/publication.entity';
-import { Comment } from 'src/comments/entities/comment.entity';
-import { Message } from 'src/messages/entities/message.entity';
-import { Sponsorship } from 'src/sponsorship/entities/sponsorship.entity';
-import { LikePublication } from 'src/like_publication/entities/like_publication.entity';
-import { LikeComment } from 'src/like_comment/entities/like_comment.entity';
-import { Tool } from 'src/tools/entities/tool.entity';
-import { AccessContent } from 'src/access_content/entities/access_content.entity';
+import { Pregnancy, PregnancyStatus } from '../../pregnancy/entities/pregnancy.entity';
+import { MedicalAppointement } from '../../medical_appointement/entities/medical_appointement.entity';
+import { Mood } from '../../mood/entities/mood.entity';
+import { MediaBaby } from '../../media_baby/entities/media_baby.entity';
+import { AnswerForm } from '../../answer_form/entities/answer_form.entity';
+import { Quiz } from '../../quiz/entities/quiz.entity';
+import { TodoList } from '../../todo_list/entities/todo_list.entity';
+import { Publication } from '../../publication/entities/publication.entity';
+import { Comment } from '../../comments/entities/comment.entity';
+import { Message } from '../../messages/entities/message.entity';
+import { Sponsorship } from '../../sponsorship/entities/sponsorship.entity';
+import { LikePublication } from '../../like_publication/entities/like_publication.entity';
+import { LikeComment } from '../../like_comment/entities/like_comment.entity';
+import { Tool } from '../../tools/entities/tool.entity';
+import { AccessContent } from '../../access_content/entities/access_content.entity';
 
 @Entity('user')
 export class User {
@@ -57,16 +57,16 @@ export class User {
     @Column({ type: 'varchar', nullable: true })
     referralCode: string;
 
-    @Column({ type: 'date', nullable: true })
+    @Column({ type: 'timestamp', nullable: true })
     premiumUntil: Date;
 
-    @Column({ type: 'datetime', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
+    @Column({ type: 'timestamptz', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     lastLogin: Date;
 
     @Column({ type: 'enum', enum: ['femme_enceinte', 'parent', 'autre'] })
     type_profil: 'femme_enceinte' | 'parent' | 'autre';
 
-    @Column({ type: 'datetime', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
+    @Column({ type: 'timestamptz', nullable: true, default: () => 'CURRENT_TIMESTAMP' })
     lastLogOut: Date;
 
      @OneToMany(() => Pregnancy, (pregnancy) => pregnancy.user)

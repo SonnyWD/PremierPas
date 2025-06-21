@@ -2,7 +2,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { CreateBabyMeasureDto } from "./dto/create-baby_measure.dto";
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { BabyMeasure } from "./entities/baby_measure.entity";
-import { Baby } from "src/baby/entities/baby.entity";
+import { Baby } from "../baby/entities/baby.entity";
 import { Repository } from "typeorm";
 
 @Injectable()

@@ -1,5 +1,5 @@
-import { User } from 'src/users/entities/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from 'typeorm';
+import { User } from '../../users/entities/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class MediaBaby {
@@ -12,7 +12,7 @@ export class MediaBaby {
     @Column({ type: 'varchar'})
     url: string;
 
-    @Column({ type: 'date'})
+    @Column({ type: 'timestamp'})
     date: Date;
 
     @ManyToOne(() => User, (user) => user.medias, { onDelete: 'CASCADE' })

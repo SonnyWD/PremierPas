@@ -1,4 +1,4 @@
-import { Baby } from 'src/baby/entities/baby.entity';
+import { Baby } from '../../baby/entities/baby.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()

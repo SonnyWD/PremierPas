@@ -3,7 +3,7 @@ import { MediaBabyService } from './media_baby.service';
 import { MediaBabyController } from './media_baby.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MediaBaby } from './entities/media_baby.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([MediaBaby, User])],

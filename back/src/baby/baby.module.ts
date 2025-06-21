@@ -3,7 +3,7 @@ import { BabyService } from './baby.service';
 import { BabyController } from './baby.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Baby } from './entities/baby.entity';
-import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
+import { Pregnancy } from '../pregnancy/entities/pregnancy.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Baby, Pregnancy])],

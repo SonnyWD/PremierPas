@@ -7,7 +7,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
-import { Tool } from 'src/tools/entities/tool.entity';
+import { Tool } from '../tools/entities/tool.entity';
 
 
 @Injectable()

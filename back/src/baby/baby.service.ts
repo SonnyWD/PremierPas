@@ -3,7 +3,7 @@ import { CreateBabyDto } from './dto/create-baby.dto';
 import { UpdateBabyDto } from './dto/update-baby.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Baby } from './entities/baby.entity';
-import { Pregnancy } from 'src/pregnancy/entities/pregnancy.entity';
+import { Pregnancy } from '../pregnancy/entities/pregnancy.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
