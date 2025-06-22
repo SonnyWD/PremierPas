@@ -35,6 +35,10 @@ export class PregnancyController {
 
   @Patch(':id')
   updatePregnancy( @Request() req, @Param('id', ParseIntPipe) id: number, @Body() updatePregnancyDto: UpdatePregnancyDto) {
+    console.log('Requête PATCH /pregnancy/:id');
+console.log('Utilisateur ID:', req.user.id);
+console.log('Pregnancy ID:', id);
+console.log('Payload:', updatePregnancyDto);
     return this.pregnancyService.updatePregnancy(req.user.id, id, updatePregnancyDto);
   }
 
