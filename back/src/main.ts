@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import 'reflect-metadata';
 
 async function bootstrap() {
@@ -14,6 +14,15 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true,
   });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    })
+  );
+  
   app.useLogger(new Logger());
   await app.listen(process.env.PORT ?? 3000);
 }

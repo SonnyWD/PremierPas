@@ -2,10 +2,6 @@ import { IsDateString, IsEnum, IsNotEmpty, IsNumber, IsOptional } from "class-va
 import { PregnancyStatus } from "../entities/pregnancy.entity";
 
 export class CreatePregnancyDto {
-    @IsNumber()
-    @IsNotEmpty()
-    id: number;
-
     @IsDateString()
     @IsOptional()
     startDate?: Date;
@@ -15,6 +11,6 @@ export class CreatePregnancyDto {
     dueDate?: Date;
 
     @IsEnum(PregnancyStatus)
-    @IsNotEmpty()
-    status: PregnancyStatus;
+    @IsOptional()
+    status?: PregnancyStatus;
 }
