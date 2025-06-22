@@ -6,6 +6,7 @@ import { UsersService } from 'src/users/users.service';
 import { LoginUserDto } from 'src/users/dto/login-user.dto';
 import * as bcrypt from 'bcrypt';
 import { Role } from './role.enum';
+import dayjs from 'dayjs';
 
 @Injectable()
 export class AuthService {
@@ -47,9 +48,13 @@ export class AuthService {
         activeBabyId = activePregnancy.babies[0].id;
     }
     
-    
+    const birthDate = user.date_naissance;
+    const age = birthDate ? dayjs().diff(dayjs(birthDate), 'year') : null;
+
     const payload = {
       email: user.email,
+      firstName: user.prenom,
+      age: age,
       sub: user.id,
       roles: user.role,
       type_profil: user.type_profil, 

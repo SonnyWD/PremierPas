@@ -21,6 +21,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       type_profil: payload.type_profil,
       isPremium: payload.isPremium,
       babyId: payload.babyId,
+      firstName: payload.firstName,
+      age: payload.age
     }; 
   }
 }

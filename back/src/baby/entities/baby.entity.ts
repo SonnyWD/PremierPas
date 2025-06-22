@@ -15,6 +15,9 @@ export class Baby {
     @Column({ type: 'varchar', nullable: true, default: ''})
     firstName: string;
 
+    @Column({ type: 'varchar', nullable: true })
+    gender: string;
+
     @ManyToOne(() => Pregnancy, (pregnancy) => pregnancy.babies, { nullable: true })
     pregnancy: Pregnancy;
 

@@ -13,4 +13,7 @@ export class CreateBabyDto {
     @IsNotEmpty()
     pregnancyId: number;  
 
+    @IsString()
+    @IsOptional()
+    gender: string;
   }

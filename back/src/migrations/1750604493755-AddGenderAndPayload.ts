@@ -1,0 +1,29 @@
+import { MigrationInterface, QueryRunner } from "typeorm";
+
+export class AddGenderAndPayload1750604493755 implements MigrationInterface {
+    name = 'AddGenderAndPayload1750604493755'
+
+    public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "baby" ADD "gender" character varying`);
+        await queryRunner.query(`UPDATE "tool" SET "path" = '' WHERE "path" IS NULL`);
+        await queryRunner.query(`ALTER TABLE "tool" ALTER COLUMN "path" SET NOT NULL`);
+        await queryRunner.query(`ALTER TYPE "public"."user_role_enum" RENAME TO "user_role_enum_old"`);
+        await queryRunner.query(`CREATE TYPE "public"."user_role_enum" AS ENUM('user', 'admin', 'premium')`);
+        await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "role" DROP DEFAULT`);
+        await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "role" TYPE "public"."user_role_enum" USING "role"::"text"::"public"."user_role_enum"`);
+        await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "role" SET DEFAULT 'user'`);
+        await queryRunner.query(`DROP TYPE "public"."user_role_enum_old"`);
+    }
+
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE TYPE "public"."user_role_enum_old" AS ENUM('user', 'admin', 'premium')`);
+        await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "role" DROP DEFAULT`);
+        await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "role" TYPE "public"."user_role_enum_old" USING "role"::"text"::"public"."user_role_enum_old"`);
+        await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "role" SET DEFAULT 'user'`);
+        await queryRunner.query(`DROP TYPE "public"."user_role_enum"`);
+        await queryRunner.query(`ALTER TYPE "public"."user_role_enum_old" RENAME TO "user_role_enum"`);
+        await queryRunner.query(`ALTER TABLE "tool" ALTER COLUMN "path" DROP NOT NULL`);
+        await queryRunner.query(`ALTER TABLE "baby" DROP COLUMN "gender"`);
+    }
+
+}
