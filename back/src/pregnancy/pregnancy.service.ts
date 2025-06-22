@@ -59,13 +59,13 @@ async updatePregnancy(userId: number, pregnancyId: number, updatePregnancyDto: U
     });
   }
 
-  private async findPregnancy(userId: number, pregnancyId: number){
+  private async findPregnancy(userId: number, pregnancyId: number) {
     const pregnancy = await this.pregnancyRepository.findOne({
-      where: { id: pregnancyId, user: { id: userId }},
+      where: { id: pregnancyId },
       relations: ['user'],
     });
-  
-    if(!pregnancy){
+
+    if (!pregnancy || pregnancy.user.id !== userId) {
       throw new NotFoundException(`Aucune grossesse trouvée avec l'ID ${pregnancyId} pour cet utilisateur.`);
     }
 
