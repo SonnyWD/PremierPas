@@ -17,34 +17,41 @@ export class BabyService {
   ) {}
 
   async createBaby(createBabyDto: CreateBabyDto) {
-    const { firstName, birthDate, pregnancyId} = createBabyDto;
+    const { firstName, birthDate, pregnancyId, gender } = createBabyDto;
 
-   
     const pregnancy = await this.pregnancyRepository.findOne({ where: { id: pregnancyId } });
     if (!pregnancy) {
       throw new NotFoundException("Grossesse non trouvée.");
     }
 
-    const existingBaby = await this.babyRepository.findOne({
+    let baby = await this.babyRepository.findOne({
       where: { pregnancy: { id: pregnancyId } }
     });
 
-    if (existingBaby) {
-      throw new BadRequestException('Un bébé est déjà associé à cette grossesse.');
+    if (baby) {
+      baby.firstName = firstName ?? '';
+      baby.gender = gender ?? '';
+
+      if (birthDate) {
+        baby.birthDate = new Date(birthDate);
+      }
+
+      const updated = await this.babyRepository.save(baby);
+      return updated;
     }
 
-    const baby = this.babyRepository.create({
+
+    baby = this.babyRepository.create({
       firstName,
-      pregnancy,  
+      gender,
+      birthDate: birthDate ? new Date(birthDate) : undefined,
+      pregnancy,
     });
 
-    if (birthDate) {
-      baby.birthDate = new Date(birthDate);
-    }
-    await this.babyRepository.save(baby);
-
-    return { message: "Bébé créé avec succès." };
+    const created = await this.babyRepository.save(baby);
+    return created;
   }
+
 
   async findBabyByUserId(userId: number): Promise<Baby> {
     const activePregnancy = await this.pregnancyRepository.findOne({
