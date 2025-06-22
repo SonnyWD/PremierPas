@@ -25,14 +25,22 @@ export class BabyService {
       throw new NotFoundException("Grossesse non trouvée.");
     }
 
-  
+    const existingBaby = await this.babyRepository.findOne({
+      where: { pregnancy: { id: pregnancyId } }
+    });
+
+    if (existingBaby) {
+      throw new BadRequestException('Un bébé est déjà associé à cette grossesse.');
+    }
+
     const baby = this.babyRepository.create({
       firstName,
-      birthDate,
       pregnancy,  
     });
 
-    
+    if (birthDate) {
+      baby.birthDate = birthDate;
+    }
     await this.babyRepository.save(baby);
 
     return { message: "Bébé créé avec succès." };
