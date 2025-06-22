@@ -27,14 +27,14 @@ export class PregnancyService {
   }
 
 async updatePregnancy(userId: number, pregnancyId: number, updatePregnancyDto: UpdatePregnancyDto){
-  const pregnancy = await this.findPregnancy(pregnancyId, userId)
+  const pregnancy = await this.findPregnancy(userId, pregnancyId);
 
   const updatedPregnancy = this.pregnancyRepository.merge(pregnancy, updatePregnancyDto);
   return await this.pregnancyRepository.save(updatedPregnancy); 
  }
 
  async deletePregnancy(userId: number, pregnancyId: number){
-  const pregnancy = await this.findPregnancy(pregnancyId, userId);
+  const pregnancy = await this.findPregnancy(userId, pregnancyId);
   await this.pregnancyRepository.remove(pregnancy);
   return { message: 'Grossesse supprimée avec succès.' };
  }
