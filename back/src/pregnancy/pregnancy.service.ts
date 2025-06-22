@@ -61,7 +61,8 @@ async updatePregnancy(userId: number, pregnancyId: number, updatePregnancyDto: U
 
   private async findPregnancy(userId: number, pregnancyId: number){
     const pregnancy = await this.pregnancyRepository.findOne({
-      where: { id: pregnancyId, user: { id: userId }}
+      where: { id: pregnancyId, user: { id: userId }},
+      relations: ['user'],
     });
   
     if(!pregnancy){
