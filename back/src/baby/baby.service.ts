@@ -39,7 +39,7 @@ export class BabyService {
     });
 
     if (birthDate) {
-      baby.birthDate = birthDate;
+      baby.birthDate = new Date(birthDate);
     }
     await this.babyRepository.save(baby);
 

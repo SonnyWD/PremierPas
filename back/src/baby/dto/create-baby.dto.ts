@@ -7,7 +7,7 @@ export class CreateBabyDto {
 
     @IsDateString()
     @IsOptional()
-    birthDate?: String;
+    birthDate?: string;
 
     @IsNumber()
     @IsNotEmpty()
