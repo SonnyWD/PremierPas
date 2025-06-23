@@ -32,9 +32,8 @@ function BabyCard() {
     const latestMeasure = sortedMeasures.length > 0 ? sortedMeasures[sortedMeasures.length - 1] : null;
 
     const displayWeight = latestMeasure && latestMeasure.weightKg !== undefined ? `${latestMeasure.weightKg}kg` : 'N/A';
-
+    
     const displaySize = latestMeasure && latestMeasure.sizeCm !== undefined ? `${latestMeasure.sizeCm}cm` : 'N/A';
-
 
     return (
         <div className="flex justify-evenly bg-bleu-clair rounded-2xl pt-[15px] px-[10px] pb-[10px] gap-4 text-white">

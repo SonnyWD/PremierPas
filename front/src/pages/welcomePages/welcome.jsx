@@ -9,6 +9,9 @@ import ParentCard from "./components/parentCard";
 import BabyCard from "./components/babyCard";
 import { useUser } from '../../context/userContext';
 import { FaPencilAlt } from "react-icons/fa";
+import ModifyPregnancyModal from "./components/pregnancyModal";
+import { useState } from "react";
+import { usePregnancy } from "../../hooks/usePregnancy";
 
 function Welcome() {
 
@@ -17,6 +20,8 @@ function Welcome() {
   const questionDuJour = dayQuestion[index];
 
   const { user, userLoading } = useUser();
+  const [showPregnancyModal, setShowPregnancyModal] = useState(false);
+  const { refresh } = usePregnancy();
 
   if (userLoading) {
     return <div>Chargement des informations de l'utilisateur...</div>;
@@ -39,8 +44,16 @@ function Welcome() {
               <p>Dans le cas d’un formulaire, on associera un label avec un autre élément du formulaire pour</p>
             </div>
           </div>
+          { showPregnancyModal && (
+            <ModifyPregnancyModal onClose={() => setShowPregnancyModal(false)} onRefresh={refresh}  />
+          ) }
           <div className="flex my-6">
-            <Btn variant="secondary" className="mr-5 flex justify-center gap-4 items-center rounded-full ml-auto py-2.5 my-4 title-bleu">Modifier ma grossesse <FaPencilAlt/> </Btn>
+            <Btn 
+            variant="secondary" 
+            className="mr-5 flex justify-center gap-4 items-center rounded-full ml-auto py-2.5 my-4 title-bleu"
+            onClick={() => setShowPregnancyModal(true)}
+            >
+              Modifier ma grossesse <FaPencilAlt/> </Btn>
           </div>
 
           <PregnancyWeeks/>
@@ -91,6 +104,9 @@ function Welcome() {
               )}
             </div>
           </section>
+          {showPregnancyModal && (
+            <ModifyPregnancyModal onClose={() => setShowPregnancyModal(false)} />
+          )}
         </div>
         
       </>

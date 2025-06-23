@@ -8,7 +8,7 @@ function CustomTodoList({ todos, onToggleComplete }) {
   return (
     <div className="list-none ml-1 text-sm space-y-2">
       {todos.map((todo) => (
-        <label
+        <div
           key={todo.id} 
           className="grid grid-cols-[25%_45%_25%] gap-4 items-center pt-2.5 cursor-default"
         >
@@ -26,15 +26,15 @@ function CustomTodoList({ todos, onToggleComplete }) {
 
           <div className="flex justify-center">
             <div
-              onClick={() => onToggleComplete && onToggleComplete(todo.id, !todo.completed)}
+              onClick={() => onToggleComplete && onToggleComplete(todo.id, !todo.done)}
               className="flex items-center justify-center h-7 w-7 border-2 border-bleu-clair rounded-sm text-black cursor-pointer"
             >
-              {todo.completed && (
+              {todo.done && (
                 <MdOutlineClose className="text-lg" />
               )}
             </div>
           </div>
-        </label>
+        </div>
       ))}
     </div>
   );

@@ -26,11 +26,28 @@ export function useSuggestedTodos(activeTab) {
     }
   }, [activeTab]);
 
+  const activateSuggestedTodo = (taskIndex) => {
+    setSuggestedTodos((prevTodos) =>
+      prevTodos.map((group) => {
+        if (group.title === selectedTitle) {
+          const updatedTaches = [...group.taches];
+          updatedTaches[taskIndex] = {
+            ...updatedTaches[taskIndex],
+            done: !updatedTaches[taskIndex].done,
+          };
+          return { ...group, taches: updatedTaches };
+        }
+        return group;
+      })
+    );
+  };
+
   return {
     suggestedTodos,
     loadingSuggested,
     errorSuggested,
     selectedTitle,
     setSelectedTitle,
+    activateSuggestedTodo
   };
 }

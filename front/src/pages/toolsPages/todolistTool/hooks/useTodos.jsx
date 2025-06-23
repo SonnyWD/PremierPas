@@ -1,48 +1,71 @@
 import { useEffect, useState } from "react";
-import { fetchTodos, fetchTodosPersonalized } from "../../../../services/todoService";
+import { fetchTodosPersonalized } from "../../../../services/todoService";
 import { useUser } from "../../../../context/userContext";  
-import { premiumContents } from "../constants"; 
+import { useSuggestedTodos } from "./useSuggestedTodo";
 
-export function useTodos() {
-  const [suggestedTodos, setSuggestedTodos] = useState([]);
+export function useTodos(activeTab) {
+  const {
+    suggestedTodos,
+    loadingSuggested,
+    errorSuggested,
+    selectedTitle: selectedSuggestedTitle,
+    setSelectedTitle: setSelectedSuggestedTitle,
+    activateSuggestedTodo
+  } = useSuggestedTodos(activeTab);
+
   const [personalizedTodos, setPersonalizedTodos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loadingPersonalized, setLoadingPersonalized] = useState(false);
+  const [errorPersonalized, setErrorPersonalized] = useState(null);
+
   const { user, userLoading } = useUser();
 
   useEffect(() => {
-    if (userLoading) return;
+    if (userLoading || activeTab !== "personnalise") return;
 
-    const fetchAll = async () => {
+    setLoadingPersonalized(true);
+
+    const fetchPersonalized = async () => {
       try {
-        const [suggested, personalized] = await Promise.all([
-          fetchTodos(),
-          fetchTodosPersonalized()
-        ]);
-
-        const suggestedWithLock = suggested.map(todo => ({
-          ...todo,
-          locked: premiumContents.includes(todo.title) && !(user?.isPremium === true),
-        }));
-
-        setSuggestedTodos(suggestedWithLock);
+        const personalized = await fetchTodosPersonalized();
         setPersonalizedTodos(personalized);
-        setLoading(false);
+        setLoadingPersonalized(false);
       } catch (err) {
-        setError("Erreur lors du chargement des tâches.");
-        setLoading(false);
+        setErrorPersonalized("Erreur lors du chargement des tâches personnalisées.");
+        setLoadingPersonalized(false);
       }
     };
 
-    fetchAll();
-  }, [user, userLoading]);
+    fetchPersonalized();
+  }, [user, userLoading, activeTab]);
+
+  const togglePersonalizedTodoComplete = (taskId, done) => {
+    console.log("TOGGLE", taskId, done);
+    setPersonalizedTodos((prev) =>
+      prev.map((group) => ({
+        ...group,
+        taches: group.taches.map((t) =>
+          t.id === taskId ? { ...t, done } : t
+        ),
+      }))
+    );
+  };
+
+  const loading =
+    userLoading ||
+    (activeTab === "suggere" ? loadingSuggested : loadingPersonalized);
+
+  const error =
+    activeTab === "suggere" ? errorSuggested : errorPersonalized;
 
   return {
     suggestedTodos,
+    selectedSuggestedTitle,
+    setSelectedSuggestedTitle,
+    activateSuggestedTodo,
     personalizedTodos,
+    setPersonalizedTodos,
+    togglePersonalizedTodoComplete,
     loading,
     error,
-    setSuggestedTodos,
-    setPersonalizedTodos
   };
 }

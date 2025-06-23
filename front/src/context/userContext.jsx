@@ -15,10 +15,13 @@ export const UserProvider = ({ children }) => {
         const userForContext = {
           id: parsedUser.sub, 
           email: parsedUser.email,
+          firstName: parsedUser.firstName, 
+          age: parsedUser.age,
           type_profil: parsedUser.type_profil,
           isPremium: parsedUser.isPremium,
           babyId: parsedUser.babyId,
         };
+
         setUser(userForContext);
       } 
       catch (e) {

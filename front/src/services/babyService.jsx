@@ -16,3 +16,41 @@ export const fetchBabyData = async () => {
         throw error;
     }
 }
+
+export const createBaby = async (payload) => {
+  const response = await axios.post(
+    `${apiUrl}/baby`,
+    payload,
+    { headers: { Authorization: `Bearer ${getToken()}` } }
+  );
+  return response.data;
+};
+
+export const createBabyMeasure = async (payload) => {
+  const response = await axios.post(
+    `${apiUrl}/baby-measures`,
+    payload,
+    { headers: { Authorization: `Bearer ${getToken()}` } }
+  );
+  return response.data;
+};
+
+export const upsertBaby = async (payload) => {
+  try {
+    const headers = {
+      Authorization: `Bearer ${getToken()}`
+    };
+console.log("Payload envoyé à /baby :", payload); 
+    const res = await axios.post(`${apiUrl}/baby`, payload, { headers });
+    return res.data;
+  } catch (err) {
+    if (
+      err.response?.status === 400 &&
+      err.response.data?.message?.includes('déjà associé')
+    ) {
+      const baby = await fetchBabyData();  
+      return baby;
+    }
+    throw err;
+  }
+};

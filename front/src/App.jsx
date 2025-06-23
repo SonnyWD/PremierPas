@@ -16,6 +16,8 @@ import { UserProvider } from "./context/userContext";
 import Welcome from "./pages/welcomePages/welcome";
 import Community from "./pages/communityPages/community";
 import BabyFeed from "./pages/toolsPages/babyTool/babyFeed";
+import ManageTitleTodos from "./pages/toolsPages/todolistTool/manageTitleTodos"
+import Nursing from "./pages/toolsPages/babyTool/nursing";
 
 function App() {
 
@@ -35,9 +37,11 @@ function App() {
 
             <Route path="/tools" element={<Tools />}/>
             <Route path="tools/todolist" element={<TodosList />} />
+            <Route path="/todos/mes-listes" element={<ManageTitleTodos />} />
 
             <Route path="tools/baby" element={<Baby />} />
             <Route path="/tools/baby/feed" element={<BabyFeed />}/>
+            <Route path="/tools/baby/feed/nursing" element={<Nursing />}/>
             <Route path="tools/mood" element={<Mood />} />
             
             <Route path="/discover" element={<Discover/>}/>

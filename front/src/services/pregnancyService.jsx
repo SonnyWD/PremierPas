@@ -22,3 +22,21 @@ export const fetchPregnancy = async () => {
         throw error;
     }
 }
+
+export const createPregnancy = async (payload) => {
+  const response = await axios.post(
+    `${apiUrl}/pregnancy`.replace(/([^:]\/)\/+/g, "$1"),
+    payload,
+    { headers: { Authorization: `Bearer ${getToken()}` } }
+  );
+  return response.data;
+};
+
+export const updatePregnancy = async (pregnancyId, payload) => {
+  const response = await axios.patch(
+    `${apiUrl}/pregnancy/${pregnancyId}`.replace(/([^:]\/)\/+/g, "$1"),
+    payload,
+    { headers: { Authorization: `Bearer ${getToken()}` } }
+  );
+  return response.data;
+};

@@ -21,12 +21,16 @@ function SuggestedTodoList({ todos, onActivate }) {
           </div>
 
           <div className="flex justify-center">
-            <input
-              type="checkbox"
-              checked={tache.done} 
-              readOnly 
-              className="appearance-none h-7 w-7 border-2 border-orange bg-transparent rounded-sm checked:bg-bleu-clair checked:border-orange focus:outline-none"
-            />
+            <div
+              onClick={() => onActivate(index)}
+              className={`h-7 w-7 border-2 rounded-sm flex items-center justify-center cursor-pointer 
+                ${tache.done ? "bg-transparent text-orange" : "bg-transparent border-orange"}`}
+            >
+              {tache.done && (
+                <span className="text-lg font-bold leading-none">✕</span>
+              )}
+            </div>
+
           </div>
         </label>
       ))}

@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { fetchPregnancy } from "../services/pregnancyService";
+import { useState, useEffect } from "react";
+import { fetchPregnancy }      from "../services/pregnancyService";
 
-export function usePregnancy() {
+export const usePregnancy = () => {
   const [pregnancy, setPregnancy] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading,    setLoading]  = useState(true);
+  const [error,      setError]    = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await fetchPregnancy();
-        setPregnancy(data);
-      } catch (err) {
-        setError("Erreur lors du chargement de la grossesse");
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  const refresh = async () => {
+    try {
+      const data = await fetchPregnancy();
+      setPregnancy(data);
+    } catch {
+      setError("Impossible de charger la grossesse.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return { pregnancy, loading, error };
-}
+  useEffect(() => { refresh(); }, []);
+
+  return { pregnancy, loading, error, refresh };
+};
