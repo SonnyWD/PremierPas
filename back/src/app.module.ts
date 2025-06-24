@@ -50,9 +50,6 @@ import { BabyMeasureModule } from './baby_measure/baby_measure.module';
 import { BabyDailyModule } from './baby_daily/baby_daily.module';
 import { BabyMeasure } from './baby_measure/entities/baby_measure.entity';
 import { BabyDaily } from './baby_daily/entities/baby_daily.entity';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 @Module({
   imports: [
@@ -67,11 +64,9 @@ dotenv.config();
       password: process.env.DB_PASSWORD,     
       database: process.env.DB_DATABASE,
       entities: [User, Pregnancy, Baby, MedicalAppointement, AppointementType, Article, Notification, Mood, MediaBaby, AnswerForm, Quiz, TodoList, Publication, LikePublication, Comment, LikeComment, Message, Sponsorship, Question, Tool, AccessContent, BabyMeasure, BabyDaily],
-      ssl: {
-      rejectUnauthorized: false,
-      },
-      synchronize: false,
+      synchronize: true,
       autoLoadEntities: true,
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
     }),
     PregnancyModule,
     BabyModule,

@@ -2,9 +2,6 @@ import { IsString, IsDate, IsEmail, IsObject, IsOptional, MinLength, Matches, Is
 
 export class CreateUserDto {
     @IsString()
-    id: string;
-
-    @IsString()
     @MinLength(2, { message: 'Le nom doit contenir au moins 2 caractères' })
     nom: string;
 
@@ -12,8 +9,12 @@ export class CreateUserDto {
     @MinLength(2, { message: 'Le prénom doit contenir au moins 2 caractères' })
     prenom: string;
 
-    @IsDate()
-    date_naissance: Date;
+    @IsOptional()
+    @IsString()
+    @Matches(/^\d{4}-\d{2}-\d{2}$/, {
+    message: 'La date doit être au format AAAA-MM-JJ',
+    })
+    date_naissance?: string;
 
     @IsEmail({}, { message: 'Format d\'email invalide' })
     email: string;

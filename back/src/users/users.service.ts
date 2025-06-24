@@ -36,6 +36,10 @@ export class UsersService {
       type_profil: createUserDto.type_profil ?? 'femme_enceinte',
     });
       
+    if (createUserDto.date_naissance) {
+      newUser.date_naissance = new Date(createUserDto.date_naissance);
+    }
+    
     const savedUser = await this.userRepository.save(newUser);
 
     return instanceToPlain(savedUser) as User;

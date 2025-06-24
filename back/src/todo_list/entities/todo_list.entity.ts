@@ -2,7 +2,7 @@ import { User } from '../../users/entities/user.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index } from 'typeorm';
 
 @Entity('user_todo') 
-@Index(["user", "suggestedTodoKey"], { unique: true, where: "suggestedTodoKey IS NOT NULL" })
+@Index(["user", "suggestedTodoKey"], { unique: true, where: `"suggestedTodoKey" IS NOT NULL`  })
 export class TodoList { 
     @PrimaryGeneratedColumn()
     id: number;
