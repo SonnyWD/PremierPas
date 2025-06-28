@@ -1,2 +1,1 @@
-
-export class DeletePregnancyDto{}
+export class DeletePregnancyDto {}

@@ -8,6 +8,6 @@ import { Quiz } from './entities/quiz.entity';
   imports: [TypeOrmModule.forFeature([Quiz])],
   controllers: [QuizController],
   providers: [QuizService],
-  exports: [TypeOrmModule, QuizService]
+  exports: [TypeOrmModule, QuizService],
 })
 export class QuizModule {}

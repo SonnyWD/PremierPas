@@ -1,17 +1,17 @@
-import { Quiz } from "../../quiz/entities/quiz.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Quiz } from '../../quiz/entities/quiz.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Question {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ type: 'text'})
-    questionText: string;
+  @Column({ type: 'text' })
+  questionText: string;
 
-    @Column({ type: 'json'})
-    suggestions: string[];
+  @Column({ type: 'json' })
+  suggestions: string[];
 
-    @ManyToOne(() => Quiz, (quiz) => quiz.questions)
-    quiz: Quiz;
+  @ManyToOne(() => Quiz, (quiz) => quiz.questions)
+  quiz: Quiz;
 }

@@ -1,17 +1,17 @@
-import { IsNumber, IsOptional } from "class-validator";
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsNumber, IsOptional } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateBabyMeasureDto {
   @ApiProperty({
     example: 12,
-    description: "ID du bébé concerné par la mesure"
+    description: 'ID du bébé concerné par la mesure',
   })
   @IsNumber()
   babyId: number;
 
   @ApiPropertyOptional({
     example: 48.5,
-    description: "Taille du bébé en centimètres"
+    description: 'Taille du bébé en centimètres',
   })
   @IsNumber()
   @IsOptional()
@@ -19,7 +19,7 @@ export class CreateBabyMeasureDto {
 
   @ApiPropertyOptional({
     example: 3.2,
-    description: "Poids du bébé en kilogrammes"
+    description: 'Poids du bébé en kilogrammes',
   })
   @IsNumber()
   @IsOptional()
@@ -27,7 +27,7 @@ export class CreateBabyMeasureDto {
 
   @ApiPropertyOptional({
     example: 36.7,
-    description: "Température corporelle du bébé en °C"
+    description: 'Température corporelle du bébé en °C',
   })
   @IsNumber()
   @IsOptional()

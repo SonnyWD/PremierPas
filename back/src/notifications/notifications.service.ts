@@ -7,8 +7,8 @@ import { Repository } from 'typeorm';
 export class NotificationsService {
   constructor(
     @InjectRepository(Notification)
-    private notificationRepository: Repository<Notification>
-  ){}
+    private notificationRepository: Repository<Notification>,
+  ) {}
 
   async findAllNotifications(): Promise<Notification[]> {
     return await this.notificationRepository.find();
@@ -16,12 +16,12 @@ export class NotificationsService {
 
   async findOneNotification(id: number): Promise<Notification> {
     const notification = await this.notificationRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    if(!notification){
-      throw new NotFoundException('Notification introuvable')
-    };
+    if (!notification) {
+      throw new NotFoundException('Notification introuvable');
+    }
 
     return notification;
   }

@@ -3,11 +3,11 @@ import { IsNotEmpty, IsString, IsInt, IsDateString } from 'class-validator';
 export class CreateMoodDto {
   @IsInt()
   @IsNotEmpty()
-  userId: number; 
+  userId: number;
 
   @IsString()
   @IsNotEmpty()
-  type: string; 
+  type: string;
 
   @IsString()
   @IsNotEmpty()
@@ -15,9 +15,9 @@ export class CreateMoodDto {
 
   @IsDateString()
   @IsNotEmpty()
-  startDate: Date; 
+  startDate: Date;
 
   @IsInt()
   @IsNotEmpty()
-  durationInHours: number; 
+  durationInHours: number;
 }

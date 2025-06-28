@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { LikeCommentService } from './like_comment.service';
 import { CreateLikeCommentDto } from './dto/create-like_comment.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -14,10 +22,13 @@ export class LikeCommentController {
   constructor(private readonly likeCommentService: LikeCommentService) {}
 
   @Post('toggle')
-  async likePost(@Request() req, @Body() createLikeCommentDto: CreateLikeCommentDto) {
+  async likePost(
+    @Request() req,
+    @Body() createLikeCommentDto: CreateLikeCommentDto,
+  ) {
     return this.likeCommentService.toggleLike(
       createLikeCommentDto.commentId,
-      req.user.id
+      req.user.id,
     );
   }
 

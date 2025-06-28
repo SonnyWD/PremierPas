@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/role.guard';
@@ -22,14 +32,8 @@ export class ArticlesController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
-  update(
-    @Param('id') id: string,
-    @Body() updateArticleDto: UpdateArticleDto
-  ){
-    return this.articlesService.updateArticle(
-      +id,
-      updateArticleDto
-    )
+  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
+    return this.articlesService.updateArticle(+id, updateArticleDto);
   }
 
   @Delete('id')
@@ -48,5 +52,4 @@ export class ArticlesController {
   findOne(@Param('id') id: string) {
     return this.articlesService.findOneArticle(+id);
   }
-
 }

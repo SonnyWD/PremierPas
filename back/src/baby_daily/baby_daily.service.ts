@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateBabyDailyDto} from './dto/create-baby_daily.dto';
+import { CreateBabyDailyDto } from './dto/create-baby_daily.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BabyDaily } from './entities/baby_daily.entity';
@@ -17,7 +17,7 @@ export class BabyDailyService {
 
   async createDailyData(dto: CreateBabyDailyDto) {
     const baby = await this.babyRepo.findOne({ where: { id: dto.babyId } });
-    if (!baby) throw new NotFoundException("Bébé non trouvé");
+    if (!baby) throw new NotFoundException('Bébé non trouvé');
 
     const daily = this.dailyRepo.create({ ...dto, baby });
     await this.dailyRepo.save(daily);
@@ -27,8 +27,7 @@ export class BabyDailyService {
 
   async getDailyDataForBaby(babyId: number) {
     return this.dailyRepo.find({
-      where: { baby: { id: babyId } }
+      where: { baby: { id: babyId } },
     });
   }
 }
-

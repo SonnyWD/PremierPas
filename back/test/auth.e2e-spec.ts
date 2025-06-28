@@ -23,12 +23,12 @@ describe('AuthController (e2e)', () => {
     const response = await request(app.getHttpServer())
       .post('/auth/register')
       .send({
-      email: 'test@example.com',
-      mot_de_passe: 'Password1',
-      nom: 'TestNom',         
-      prenom: 'TestPrenom',   
-      date_naissance: '2000-01-01' 
-    })  
+        email: 'test@example.com',
+        mot_de_passe: 'Password1',
+        nom: 'TestNom',
+        prenom: 'TestPrenom',
+        date_naissance: '2000-01-01',
+      })
       .expect(201);
 
     expect(response.body.email).toBe('test@example.com');

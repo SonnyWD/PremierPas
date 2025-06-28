@@ -9,6 +9,6 @@ import { Pregnancy } from '../pregnancy/entities/pregnancy.entity';
   imports: [TypeOrmModule.forFeature([Baby, Pregnancy])],
   controllers: [BabyController],
   providers: [BabyService],
-  exports: [TypeOrmModule, BabyService]
+  exports: [TypeOrmModule, BabyService],
 })
 export class BabyModule {}

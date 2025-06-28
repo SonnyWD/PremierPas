@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
@@ -15,12 +25,23 @@ export class PublicationController {
 
   @Post()
   create(@Request() req, @Body() createPublicationDto: CreatePublicationDto) {
-    return this.publicationService.createPublication(req.user.id, createPublicationDto);
+    return this.publicationService.createPublication(
+      req.user.id,
+      createPublicationDto,
+    );
   }
 
   @Patch(':id')
-  update(@Request() req, @Param('id') id: string, @Body() updatePublicationDto: UpdatePublicationDto) {
-    return this.publicationService.updatePublication(+id, req.user.id, updatePublicationDto);
+  update(
+    @Request() req,
+    @Param('id') id: string,
+    @Body() updatePublicationDto: UpdatePublicationDto,
+  ) {
+    return this.publicationService.updatePublication(
+      +id,
+      req.user.id,
+      updatePublicationDto,
+    );
   }
 
   @Delete(':id')

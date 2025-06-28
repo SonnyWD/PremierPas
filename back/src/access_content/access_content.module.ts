@@ -9,6 +9,6 @@ import { User } from 'src/users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([AccessContent, User])],
   controllers: [AccessContentController],
   providers: [AccessContentService],
-  exports: [TypeOrmModule, AccessContentService]
+  exports: [TypeOrmModule, AccessContentService],
 })
 export class AccessContentModule {}

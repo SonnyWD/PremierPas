@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateLikeCommentDto {
-    @IsNumber()
-    @IsNotEmpty()
-    userId: number; 
+  @IsNumber()
+  @IsNotEmpty()
+  userId: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    commentId: number;
+  @IsNumber()
+  @IsNotEmpty()
+  commentId: number;
 }

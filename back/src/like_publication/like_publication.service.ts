@@ -17,14 +17,18 @@ export class LikePublicationService {
   ) {}
 
   async toggleLike(publicationId: number, userId: number): Promise<string> {
-    const publication = await this.publicationRepository.findOne({ where: { id: publicationId } });
+    const publication = await this.publicationRepository.findOne({
+      where: { id: publicationId },
+    });
     const user = await this.userRepository.findOne({ where: { id: userId } });
 
     if (!publication || !user) {
       throw new NotFoundException('Publication ou utilisateur introuvable');
     }
 
-    const existingLike = await this.likeRepository.findOne({ where: { publication, user } });
+    const existingLike = await this.likeRepository.findOne({
+      where: { publication, user },
+    });
 
     if (existingLike) {
       await this.likeRepository.remove(existingLike);
@@ -37,6 +41,8 @@ export class LikePublicationService {
   }
 
   async countLikes(publicationId: number): Promise<number> {
-    return this.likeRepository.count({ where: { publication: { id: publicationId } } });
+    return this.likeRepository.count({
+      where: { publication: { id: publicationId } },
+    });
   }
 }

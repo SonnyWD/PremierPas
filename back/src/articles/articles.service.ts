@@ -1,17 +1,20 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './entities/article.entity';
 import { Repository } from 'typeorm';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 
-
 @Injectable()
 export class ArticlesService {
   constructor(
     @InjectRepository(Article)
-    private readonly articleRepository: Repository<Article>
-  ){}
+    private readonly articleRepository: Repository<Article>,
+  ) {}
 
   async createArticle(adminId: number, article: CreateArticleDto) {
     const newArticle = this.articleRepository.create({
@@ -21,12 +24,15 @@ export class ArticlesService {
     return await this.articleRepository.save(newArticle);
   }
 
-  async updateArticle(id: number, updateArticle: UpdateArticleDto): Promise<Article>{
+  async updateArticle(
+    id: number,
+    updateArticle: UpdateArticleDto,
+  ): Promise<Article> {
     const article = await this.articleRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    if(!article){
+    if (!article) {
       throw new NotFoundException(`L'article avec l'ID ${id} est introuvable`);
     }
 
@@ -43,10 +49,10 @@ export class ArticlesService {
 
   async removeArticle(id: number): Promise<Article> {
     const article = await this.articleRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    if(!article){
+    if (!article) {
       throw new NotFoundException(`L'article avec l'ID ${id} est introuvable`);
     }
 
@@ -57,19 +63,19 @@ export class ArticlesService {
 
   async findAllArticles(): Promise<Article[]> {
     return await this.articleRepository.find({
-      order: { creationDate: 'DESC' }
+      order: { creationDate: 'DESC' },
     });
   }
 
   async findOneArticle(id: number): Promise<Article> {
     const article = await this.articleRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    if(!article) {
+    if (!article) {
       throw new NotFoundException(`L'article avec l'ID ${id} est introuvable`);
     }
 
     return article;
-}
+  }
 }

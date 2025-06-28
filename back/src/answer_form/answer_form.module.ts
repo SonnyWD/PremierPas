@@ -6,9 +6,12 @@ import { AnswerForm } from './entities/answer_form.entity';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AnswerForm]), forwardRef(() => UsersModule)],
+  imports: [
+    TypeOrmModule.forFeature([AnswerForm]),
+    forwardRef(() => UsersModule),
+  ],
   controllers: [AnswerFormController],
   providers: [AnswerFormService],
-  exports: [TypeOrmModule, AnswerFormService]
+  exports: [TypeOrmModule, AnswerFormService],
 })
 export class AnswerFormModule {}

@@ -28,7 +28,7 @@ export class ToolsService {
   }
 
   async update(id: number, updateToolDto: UpdateToolDto) {
-    await this.findOne(id); 
+    await this.findOne(id);
     await this.toolRepository.update(id, updateToolDto);
     return this.findOne(id);
   }

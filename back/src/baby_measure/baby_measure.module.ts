@@ -11,4 +11,3 @@ import { Baby } from '../baby/entities/baby.entity';
   providers: [BabyMeasureService],
 })
 export class BabyMeasureModule {}
-

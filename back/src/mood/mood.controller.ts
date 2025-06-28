@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { MoodService } from './mood.service';
 import { CreateMoodDto } from './dto/create-mood.dto';
 import { UpdateMoodDto } from './dto/update-mood.dto';
@@ -16,10 +26,16 @@ export class MoodController {
 
   @Post()
   async createMood(@Body() createMoodDto: CreateMoodDto): Promise<any> {
-    const { userId, type, description, startDate, durationInHours } = createMoodDto;
+    const { userId, type, description, startDate, durationInHours } =
+      createMoodDto;
 
-
-    return this.moodService.setMood(userId, type, description, startDate, durationInHours);
+    return this.moodService.setMood(
+      userId,
+      type,
+      description,
+      startDate,
+      durationInHours,
+    );
   }
 
   @Get()
@@ -33,12 +49,17 @@ export class MoodController {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateMoodDto: UpdateMoodDto): Promise<Mood> {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMoodDto: UpdateMoodDto,
+  ): Promise<Mood> {
     return this.moodService.updateMood(id, updateMoodDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<{ message: string }> {
+  async remove(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ message: string }> {
     return this.moodService.removeMood(id);
   }
 }

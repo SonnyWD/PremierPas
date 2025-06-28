@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,35 +16,33 @@ export class MessagesService {
     @InjectRepository(Message)
     private readonly messageRepository: Repository<Message>,
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>
-  ){}
-
+    private readonly userRepository: Repository<User>,
+  ) {}
 
   async sendMessage(createMessageDto: CreateMessageDto) {
-    const { userId, title, content, sendingDate, receveurId } = createMessageDto;
+    const { userId, title, content, sendingDate, receveurId } =
+      createMessageDto;
 
-   
     const sender = await this.userRepository.findOne({ where: { id: userId } });
     if (!sender) {
       throw new NotFoundException('Utilisateur non trouvé.');
     }
 
-    
-    const receveur = await this.userRepository.findOne({ where: { id: receveurId } });
+    const receveur = await this.userRepository.findOne({
+      where: { id: receveurId },
+    });
     if (!receveur) {
       throw new NotFoundException('Destinataire non trouvé.');
     }
 
-   
     const message = this.messageRepository.create({
       title,
       content,
       sendingDate,
-      envoyeur: sender,  
-      receveur: receveur,  
+      envoyeur: sender,
+      receveur: receveur,
     });
 
-   
     await this.messageRepository.save(message);
 
     return { message: 'Message envoyé avec succès.' };
@@ -49,8 +51,8 @@ export class MessagesService {
   async findAllMessages(userId: number): Promise<Message[]> {
     return await this.messageRepository.find({
       where: [
-        { envoyeur: { id: userId } , isDeletedBySender: false },
-        { receveur: { id: userId } , isDeletedByReceiver: false }, 
+        { envoyeur: { id: userId }, isDeletedBySender: false },
+        { receveur: { id: userId }, isDeletedByReceiver: false },
       ],
       relations: ['envoyeur', 'receveur'],
       order: {
@@ -62,43 +64,49 @@ export class MessagesService {
   async findOneMessage(id: number, userId: number): Promise<Message> {
     const existingMessage = await this.messageRepository.findOne({
       where: { id },
-      relations: ['envoyeur', 'receveur']
+      relations: ['envoyeur', 'receveur'],
     });
 
-    if(!existingMessage){
-      throw new NotFoundException(`Message introuvable.`)
-    };
+    if (!existingMessage) {
+      throw new NotFoundException(`Message introuvable.`);
+    }
 
-    const isSenderOrReceiver = existingMessage.envoyeur.id === userId || existingMessage.receveur.id === userId;
+    const isSenderOrReceiver =
+      existingMessage.envoyeur.id === userId ||
+      existingMessage.receveur.id === userId;
 
-    if(!isSenderOrReceiver){
-      throw new NotFoundException(`Vous n'avez pas accès à ce message.`)
+    if (!isSenderOrReceiver) {
+      throw new NotFoundException(`Vous n'avez pas accès à ce message.`);
     }
 
     return existingMessage;
   }
 
-  async updateMessage(id: number, userId: number, dto: UpdateMessageDto): Promise<Message> {
-    throw new ForbiddenException('La modification des messages n\'est pas autorisée.');
+  async updateMessage(
+    id: number,
+    userId: number,
+    dto: UpdateMessageDto,
+  ): Promise<Message> {
+    throw new ForbiddenException(
+      "La modification des messages n'est pas autorisée.",
+    );
   }
 
   async removeMessage(id: number, userId: number): Promise<Message> {
     const existingMessage = await this.messageRepository.findOne({
       where: { id },
-      relations: ['envoyeur', 'receveur']
+      relations: ['envoyeur', 'receveur'],
     });
 
-    if(!existingMessage){
-      throw new NotFoundException(`Message introuvable.`)
-    };
-
-    if(existingMessage.envoyeur.id === userId){
-      existingMessage.isDeletedBySender = true;
-    } 
-    else if(existingMessage.receveur.id === userId){
-      existingMessage.isDeletedByReceiver = true;
+    if (!existingMessage) {
+      throw new NotFoundException(`Message introuvable.`);
     }
-    else {
+
+    if (existingMessage.envoyeur.id === userId) {
+      existingMessage.isDeletedBySender = true;
+    } else if (existingMessage.receveur.id === userId) {
+      existingMessage.isDeletedByReceiver = true;
+    } else {
       throw new ForbiddenException('Vous ne pouvez pas supprimer ce message.');
     }
     await this.messageRepository.save(existingMessage);

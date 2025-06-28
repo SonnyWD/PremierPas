@@ -1,6 +1,12 @@
-import { IsDateString, IsEnum, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
-import { PregnancyStatus } from "../entities/pregnancy.entity";
-import { ApiPropertyOptional } from "@nestjs/swagger";
+import {
+  IsDateString,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+} from 'class-validator';
+import { PregnancyStatus } from '../entities/pregnancy.entity';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreatePregnancyDto {
   @ApiPropertyOptional({
@@ -22,7 +28,7 @@ export class CreatePregnancyDto {
   @ApiPropertyOptional({
     enum: PregnancyStatus,
     description: 'Statut de la grossesse (ex: IN_PROGRESS, COMPLETED, etc.)',
-    example: PregnancyStatus.IN_PROGRESS
+    example: PregnancyStatus.IN_PROGRESS,
   })
   @IsEnum(PregnancyStatus)
   @IsOptional()

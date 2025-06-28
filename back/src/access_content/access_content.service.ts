@@ -9,18 +9,18 @@ import { isPremium } from '../src/utils/user-utils';
 export class AccessContentService {
   constructor(
     @InjectRepository(AccessContent)
-    private acessContentRepository: Repository<AccessContent>
+    private acessContentRepository: Repository<AccessContent>,
   ) {}
 
-  async canAcessContent(user: User, contentId: number): Promise<boolean>{
-    if(isPremium(user)){
+  async canAcessContent(user: User, contentId: number): Promise<boolean> {
+    if (isPremium(user)) {
       return true;
     }
 
     const accessWithPoints = await this.acessContentRepository.findOne({
       where: {
-        user: { id: user.id},
-        contentId: contentId
+        user: { id: user.id },
+        contentId: contentId,
       },
     });
 

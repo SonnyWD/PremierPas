@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AnswerFormService } from './answer_form.service';
 import { CreateAnswerFormDto } from './dto/create-answer_form.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -14,11 +22,15 @@ export class AnswerFormController {
   @Post()
   @Roles(Role.USER, Role.ADMIN)
   create(
-  @Body() createAnswerFormDto: CreateAnswerFormDto, 
-  @Request() req,
-  @Param('formId') formId: string,
-) {
-    return this.answerFormService.submitAnswer(+req.user.id, +formId, createAnswerFormDto);
+    @Body() createAnswerFormDto: CreateAnswerFormDto,
+    @Request() req,
+    @Param('formId') formId: string,
+  ) {
+    return this.answerFormService.submitAnswer(
+      +req.user.id,
+      +formId,
+      createAnswerFormDto,
+    );
   }
 
   @Get()

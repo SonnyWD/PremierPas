@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request, ParseIntPipe, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+  ParseIntPipe,
+  UseGuards,
+} from '@nestjs/common';
 import { MedicalAppointementService } from './medical_appointement.service';
 import { CreateMedicalAppointementDto } from './dto/create-medical_appointement.dto';
 import { UpdateMedicalAppointementDto } from './dto/update-medical_appointement.dto';
@@ -11,18 +22,23 @@ import { Role } from 'src/auth/role.enum';
 @Roles(Role.ADMIN, Role.USER)
 @Controller('medical-appointement')
 export class MedicalAppointementController {
-  constructor(private readonly medicalAppointementService: MedicalAppointementService) {}
+  constructor(
+    private readonly medicalAppointementService: MedicalAppointementService,
+  ) {}
 
   @Post()
   create(@Request() req, @Body() dto: CreateMedicalAppointementDto) {
-    const userId = req.user.id; 
-    return this.medicalAppointementService.createMedicalAppointement(dto, userId);
+    const userId = req.user.id;
+    return this.medicalAppointementService.createMedicalAppointement(
+      dto,
+      userId,
+    );
   }
 
   @Get()
-findAll(@Request() req) {
-  return this.medicalAppointementService.findAll(req.user.id);
-}
+  findAll(@Request() req) {
+    return this.medicalAppointementService.findAll(req.user.id);
+  }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
@@ -30,8 +46,14 @@ findAll(@Request() req) {
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateMedicalAppointementDto: UpdateMedicalAppointementDto) {
-    return this.medicalAppointementService.updateMedicalAppointement(id, updateMedicalAppointementDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateMedicalAppointementDto: UpdateMedicalAppointementDto,
+  ) {
+    return this.medicalAppointementService.updateMedicalAppointement(
+      id,
+      updateMedicalAppointementDto,
+    );
   }
 
   @Delete(':id')

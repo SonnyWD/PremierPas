@@ -9,6 +9,6 @@ import { User } from '../users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([MediaBaby, User])],
   controllers: [MediaBabyController],
   providers: [MediaBabyService],
-  exports: [TypeOrmModule, MediaBabyService]
+  exports: [TypeOrmModule, MediaBabyService],
 })
 export class MediaBabyModule {}

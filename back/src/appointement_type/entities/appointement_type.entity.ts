@@ -3,15 +3,18 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class AppointementType {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ type: 'varchar'})
-    title: string;
+  @Column({ type: 'varchar' })
+  title: string;
 
-    @Column({ type: 'text', nullable: true})
-    description: string;
+  @Column({ type: 'text', nullable: true })
+  description: string;
 
-    @OneToMany(() => MedicalAppointement, (medicalAppointement) => medicalAppointement.appointementType)
-    medicalAppointements: MedicalAppointement[];
+  @OneToMany(
+    () => MedicalAppointement,
+    (medicalAppointement) => medicalAppointement.appointementType,
+  )
+  medicalAppointements: MedicalAppointement[];
 }

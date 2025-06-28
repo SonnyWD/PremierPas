@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+} from '@nestjs/common';
 import { MediaBabyService } from './media_baby.service';
 import { CreateMediaBabyDto } from './dto/create-media_baby.dto';
 import { UpdateMediaBabyDto } from './dto/update-media_baby.dto';
@@ -23,8 +32,18 @@ export class MediaBabyController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMediaBabyDto: UpdateMediaBabyDto, userId: number, userRole: string) {
-    return this.mediaBabyService.updateMedia(+id, updateMediaBabyDto, userId, userRole);
+  update(
+    @Param('id') id: string,
+    @Body() updateMediaBabyDto: UpdateMediaBabyDto,
+    userId: number,
+    userRole: string,
+  ) {
+    return this.mediaBabyService.updateMedia(
+      +id,
+      updateMediaBabyDto,
+      userId,
+      userRole,
+    );
   }
 
   @Delete(':id')

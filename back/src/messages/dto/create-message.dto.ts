@@ -1,10 +1,10 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateMessageDto {
   @IsNumber()
   @IsNotEmpty()
-  userId: number; 
-  
+  userId: number;
+
   @IsString()
   @IsNotEmpty()
   title: string;

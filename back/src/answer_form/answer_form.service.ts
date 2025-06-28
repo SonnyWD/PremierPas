@@ -10,10 +10,14 @@ export class AnswerFormService {
   constructor(
     @InjectRepository(AnswerForm)
     private answerFormRepository: Repository<AnswerForm>,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
   ) {}
 
-  async submitAnswer(userId: number, formId: number, answers: CreateAnswerFormDto) {
+  async submitAnswer(
+    userId: number,
+    formId: number,
+    answers: CreateAnswerFormDto,
+  ) {
     const user = await this.usersService.findUser(userId);
 
     const newAnswer = this.answerFormRepository.create({
@@ -24,29 +28,25 @@ export class AnswerFormService {
 
     await this.answerFormRepository.save(newAnswer);
 
-    return { message: "Réponse au formulaire soumise avec succès." };
+    return { message: 'Réponse au formulaire soumise avec succès.' };
   }
-
 
   async findAll(userId: number): Promise<AnswerForm[]> {
     return await this.answerFormRepository.find({
-      where: { user: {id: userId}},
-      relations: ['user']
-    })
+      where: { user: { id: userId } },
+      relations: ['user'],
+    });
   }
 
   async findOne(id: number): Promise<AnswerForm> {
     const answersForm = await this.answerFormRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    if(!answersForm){
+    if (!answersForm) {
       throw new NotFoundException('Aucune réponse de formulaire trouvée.');
     }
 
     return answersForm;
   }
-
 }
-
-

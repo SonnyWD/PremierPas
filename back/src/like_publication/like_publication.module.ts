@@ -8,10 +8,12 @@ import { Publication } from '../publication/entities/publication.entity';
 import { User } from '../users/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([LikePublication, Publication, User]),
-PublicationModule],
+  imports: [
+    TypeOrmModule.forFeature([LikePublication, Publication, User]),
+    PublicationModule,
+  ],
   controllers: [LikePublicationController],
   providers: [LikePublicationService],
-  exports: [TypeOrmModule, LikePublicationService]
+  exports: [TypeOrmModule, LikePublicationService],
 })
 export class LikePublicationModule {}

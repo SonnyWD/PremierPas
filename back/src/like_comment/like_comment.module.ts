@@ -10,6 +10,6 @@ import { User } from '../users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([LikeComment, Comment, User])],
   controllers: [LikeCommentController],
   providers: [LikeCommentService],
-  exports: [TypeOrmModule, LikeCommentService]
+  exports: [TypeOrmModule, LikeCommentService],
 })
 export class LikeCommentModule {}

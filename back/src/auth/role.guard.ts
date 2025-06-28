@@ -1,8 +1,12 @@
-import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { Role } from './role.enum';
-
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -22,7 +26,7 @@ export class RolesGuard implements CanActivate {
     }
 
     // Vérifie si l'utilisateur possède un des rôles requis
-    const hasRole = roles.some(role => user.roles?.includes(role)); // On compare le rôle de l'utilisateur
+    const hasRole = roles.some((role) => user.roles?.includes(role)); // On compare le rôle de l'utilisateur
     if (!hasRole) {
       throw new ForbiddenException('Accès interdit');
     }

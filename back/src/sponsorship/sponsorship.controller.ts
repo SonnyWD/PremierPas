@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { SponsorshipService } from './sponsorship.service';
 import { CreateSponsorshipDto } from './dto/create-sponsorship.dto';
 import { UpdateSponsorshipDto } from './dto/update-sponsorship.dto';
@@ -14,7 +23,7 @@ export class SponsorshipController {
   ) {
     return this.sponsorshipService.validateSponsorship(
       createSponsorshipDto.referralCode,
-      userId
+      userId,
     );
   }
 

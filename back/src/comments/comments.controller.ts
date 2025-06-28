@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
@@ -15,9 +25,12 @@ export class CommentsController {
   @Post()
   @Roles(Role.USER, Role.ADMIN)
   create(@Request() req, @Body() createCommentDto: CreateCommentDto) {
-  return this.commentsService.createComment(req.user.id, createCommentDto.publicationId, createCommentDto);
-}
-
+    return this.commentsService.createComment(
+      req.user.id,
+      createCommentDto.publicationId,
+      createCommentDto,
+    );
+  }
 
   @Get()
   findAll() {
@@ -25,16 +38,22 @@ export class CommentsController {
   }
 
   @Get(':id')
-  findOne(
-    @Param('id') id: string
-) {
+  findOne(@Param('id') id: string) {
     return this.commentsService.findComment(+id);
   }
 
   @Patch(':id')
   @Roles(Role.USER, Role.ADMIN)
-  update(@Request() req, @Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentsService.updateComment(+id, req.user.id, updateCommentDto);
+  update(
+    @Request() req,
+    @Param('id') id: string,
+    @Body() updateCommentDto: UpdateCommentDto,
+  ) {
+    return this.commentsService.updateComment(
+      +id,
+      req.user.id,
+      updateCommentDto,
+    );
   }
 
   @Delete(':id')

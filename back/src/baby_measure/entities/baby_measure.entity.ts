@@ -18,6 +18,6 @@ export class BabyMeasure {
   @Column({ type: 'decimal', precision: 4, scale: 2, nullable: true })
   temperatureC: number;
 
-  @ManyToOne(() => Baby, baby => baby.measures, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Baby, (baby) => baby.measures, { onDelete: 'CASCADE' })
   baby: Baby;
 }

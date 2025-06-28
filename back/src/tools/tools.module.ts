@@ -8,6 +8,6 @@ import { Tool } from './entities/tool.entity';
   imports: [TypeOrmModule.forFeature([Tool])],
   controllers: [ToolsController],
   providers: [ToolsService],
-  exports: [ToolsService]
+  exports: [ToolsService],
 })
 export class ToolsModule {}

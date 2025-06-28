@@ -9,6 +9,6 @@ import { User } from 'src/users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([AppointementType, User])],
   controllers: [AppointementTypeController],
   providers: [AppointementTypeService],
-  exports: [TypeOrmModule, AppointementTypeService], 
+  exports: [TypeOrmModule, AppointementTypeService],
 })
 export class AppointementTypeModule {}

@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request, ParseIntPipe, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+  ParseIntPipe,
+  UseGuards,
+} from '@nestjs/common';
 import { PregnancyService } from './pregnancy.service';
 import { CreatePregnancyDto } from './dto/create-pregnancy.dto';
 import { UpdatePregnancyDto } from './dto/update-pregnancy.dto';
@@ -25,25 +36,33 @@ export class PregnancyController {
 
   @Get('active')
   getActivePregnancy(@Request() req) {
-  return this.pregnancyService.findActivePregnancy(req.user.id);
+    return this.pregnancyService.findActivePregnancy(req.user.id);
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number,  @Request() req) {
+  findOne(@Param('id', ParseIntPipe) id: number, @Request() req) {
     return this.pregnancyService.findOnePregnancy(req.user.id, id);
   }
 
   @Patch(':id')
-  updatePregnancy( @Request() req, @Param('id', ParseIntPipe) id: number, @Body() updatePregnancyDto: UpdatePregnancyDto) {
+  updatePregnancy(
+    @Request() req,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePregnancyDto: UpdatePregnancyDto,
+  ) {
     console.log('Requête PATCH /pregnancy/:id');
-console.log('Utilisateur ID:', req.user.id);
-console.log('Pregnancy ID:', id);
-console.log('Payload:', updatePregnancyDto);
-    return this.pregnancyService.updatePregnancy(req.user.id, id, updatePregnancyDto);
+    console.log('Utilisateur ID:', req.user.id);
+    console.log('Pregnancy ID:', id);
+    console.log('Payload:', updatePregnancyDto);
+    return this.pregnancyService.updatePregnancy(
+      req.user.id,
+      id,
+      updatePregnancyDto,
+    );
   }
 
   @Delete(':id')
-  deletePregnancy( @Request() req, @Param('id', ParseIntPipe) id: number) {
+  deletePregnancy(@Request() req, @Param('id', ParseIntPipe) id: number) {
     return this.pregnancyService.deletePregnancy(req.user.id, id);
   }
 }

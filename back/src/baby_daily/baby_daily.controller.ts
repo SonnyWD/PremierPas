@@ -1,4 +1,11 @@
-import { Controller, Post, Get, Param, Body, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  Body,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { BabyDailyService } from './baby_daily.service';
 import { CreateBabyDailyDto } from './dto/create-baby_daily.dto';
 

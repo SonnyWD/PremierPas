@@ -9,6 +9,6 @@ import { User } from '../users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([Message, User])],
   controllers: [MessagesController],
   providers: [MessagesService],
-  exports: [TypeOrmModule, MessagesService]
+  exports: [TypeOrmModule, MessagesService],
 })
 export class MessagesModule {}

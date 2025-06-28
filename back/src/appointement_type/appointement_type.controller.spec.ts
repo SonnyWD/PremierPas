@@ -11,7 +11,9 @@ describe('AppointementTypeController', () => {
       providers: [AppointementTypeService],
     }).compile();
 
-    controller = module.get<AppointementTypeController>(AppointementTypeController);
+    controller = module.get<AppointementTypeController>(
+      AppointementTypeController,
+    );
   });
 
   it('should be defined', () => {

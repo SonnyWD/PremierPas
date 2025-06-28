@@ -4,8 +4,8 @@ import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tool } from 'src/tools/entities/tool.entity';
-import { ToolsModule } from 'src/tools/tools.module'; 
-import { PregnancyModule } from 'src/pregnancy/pregnancy.module'; 
+import { ToolsModule } from 'src/tools/tools.module';
+import { PregnancyModule } from 'src/pregnancy/pregnancy.module';
 import { MedicalAppointementModule } from 'src/medical_appointement/medical_appointement.module';
 import { MoodModule } from 'src/mood/mood.module';
 import { MediaBabyModule } from 'src/media_baby/media_baby.module';
@@ -20,27 +20,27 @@ import { MessagesModule } from 'src/messages/messages.module';
 import { SponsorshipModule } from 'src/sponsorship/sponsorship.module';
 import { AccessContentModule } from 'src/access_content/access_content.module';
 
-
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Tool]),
-                ToolsModule,                            
-                PregnancyModule,                         
-                MedicalAppointementModule,
-                MoodModule,
-                MediaBabyModule,
-                AnswerFormModule,
-                QuizModule,
-                TodoListModule,
-                LikePublicationModule,
-                LikeCommentModule,
-                PublicationModule,
-                CommentsModule,
-                MessagesModule,
-                SponsorshipModule,
-                AccessContentModule
-              ],
+  imports: [
+    TypeOrmModule.forFeature([User, Tool]),
+    ToolsModule,
+    PregnancyModule,
+    MedicalAppointementModule,
+    MoodModule,
+    MediaBabyModule,
+    AnswerFormModule,
+    QuizModule,
+    TodoListModule,
+    LikePublicationModule,
+    LikeCommentModule,
+    PublicationModule,
+    CommentsModule,
+    MessagesModule,
+    SponsorshipModule,
+    AccessContentModule,
+  ],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [UsersService]
+  exports: [UsersService],
 })
 export class UsersModule {}

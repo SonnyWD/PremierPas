@@ -1,5 +1,11 @@
 import { Baby } from '../../baby/entities/baby.entity';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity()
 export class BabyDaily {
@@ -15,6 +21,6 @@ export class BabyDaily {
   @Column({ type: 'timestamp', nullable: true })
   lastFeed: Date;
 
-  @ManyToOne(() => Baby, baby => baby.daily, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Baby, (baby) => baby.daily, { onDelete: 'CASCADE' })
   baby: Baby;
 }

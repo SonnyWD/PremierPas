@@ -8,17 +8,16 @@ export class QuizService {
   constructor(
     @InjectRepository(Quiz)
     private quizRepository: Repository<Quiz>,
-  ){}
+  ) {}
 
   async findAllQuiz(): Promise<Quiz[]> {
     return await this.quizRepository.find();
   }
 
-
   async findOneQuiz(id: number): Promise<Quiz> {
     const quiz = await this.quizRepository.findOne({
       where: { id },
-      relations: ['questions']
+      relations: ['questions'],
     });
 
     if (!quiz) {

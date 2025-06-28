@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Request, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { LikePublicationService } from './like_publication.service';
 import { CreateLikePublicationDto } from './dto/create-like_publication.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -10,13 +18,18 @@ import { Role } from 'src/auth/role.enum';
 @Roles(Role.ADMIN, Role.USER)
 @Controller('like-publication')
 export class LikePublicationController {
-  constructor(private readonly likePublicationService: LikePublicationService) {}
+  constructor(
+    private readonly likePublicationService: LikePublicationService,
+  ) {}
 
   @Post('toggle')
-  async likePost(@Request() req, @Body() createLikePublicationDto: CreateLikePublicationDto) {
+  async likePost(
+    @Request() req,
+    @Body() createLikePublicationDto: CreateLikePublicationDto,
+  ) {
     return this.likePublicationService.toggleLike(
       createLikePublicationDto.publicationId,
-      req.user.id
+      req.user.id,
     );
   }
 

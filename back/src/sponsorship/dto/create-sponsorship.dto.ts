@@ -1,7 +1,7 @@
-import { IsString, IsNotEmpty } from "class-validator";
+import { IsString, IsNotEmpty } from 'class-validator';
 
 export class CreateSponsorshipDto {
-    @IsString()
-    @IsNotEmpty()
-    referralCode: string;
+  @IsString()
+  @IsNotEmpty()
+  referralCode: string;
 }

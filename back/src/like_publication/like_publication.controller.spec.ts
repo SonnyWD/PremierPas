@@ -11,7 +11,9 @@ describe('LikePublicationController', () => {
       providers: [LikePublicationService],
     }).compile();
 
-    controller = module.get<LikePublicationController>(LikePublicationController);
+    controller = module.get<LikePublicationController>(
+      LikePublicationController,
+    );
   });
 
   it('should be defined', () => {

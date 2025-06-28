@@ -9,6 +9,6 @@ import { User } from '../users/entities/user.entity';
   imports: [TypeOrmModule.forFeature([TodoList, User])],
   controllers: [TodoListController],
   providers: [TodoListService],
-  exports: [TypeOrmModule, TodoListService]
+  exports: [TypeOrmModule, TodoListService],
 })
 export class TodoListModule {}

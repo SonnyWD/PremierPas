@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Request, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Request,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateTodoListDto } from './dto/create-todo_list.dto';
 import { UpdateTodoListDto } from './dto/update-todo_list.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -14,18 +24,12 @@ export class TodoListController {
   constructor(private readonly todoListService: TodoListService) {}
 
   @Post('custom')
-  async createCustom(
-    @Request() req,
-    @Body() createTodoDto: CreateTodoListDto,
-  ) {
+  async createCustom(@Request() req, @Body() createTodoDto: CreateTodoListDto) {
     return this.todoListService.createCustomTodo(createTodoDto, req.user.id);
   }
 
   @Post('activate-suggested/:key')
-  async activateSuggested(
-    @Request() req,
-    @Param('key') key: string,
-  ) {
+  async activateSuggested(@Request() req, @Param('key') key: string) {
     return this.todoListService.activateSuggestedTodo(+key, req.user.id);
   }
 
